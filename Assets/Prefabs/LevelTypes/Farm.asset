@@ -15,3 +15,4 @@ MonoBehaviour:
   _set: {fileID: 11400000, guid: 5b153648f096fe249b5a631f131ce770, type: 2}
   _enviroment: {fileID: 9221824796856695083, guid: b4536b2ca603244438d8b0058a4d89a5,
     type: 3}
+  _element: 2

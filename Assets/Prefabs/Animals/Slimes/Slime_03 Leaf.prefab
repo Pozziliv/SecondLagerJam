@@ -394,6 +394,8 @@ MonoBehaviour:
   _id: 7
   _countColor: {r: 0.30233082, g: 0.8113208, b: 0.22579211, a: 1}
   _stats: {fileID: 2218379978907552319}
+  _level: 3
+  _element: 0
 --- !u!114 &2218379978907552319
 MonoBehaviour:
   m_ObjectHideFlags: 0
