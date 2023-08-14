@@ -266,14 +266,14 @@ public class Net : MonoBehaviour
 
     private void Spawn(Vector3 position, int index, int row, bool edge)
     {
-        Node node = Instantiate(_prefab, transform.position + position, Quaternion.identity);
+        Node node = Instantiate(_prefab, transform.position + position + new Vector3(0, 1f, 0), Quaternion.identity);
         node.Init(index, row, edge);
         _nodes.Add(node);
     }
 
     private void SpawnAnimal(Node node)
     {
-        node.MakeBusy(_spawner.Spawn(node.transform.position));
+        node.MakeBusy(_spawner.Spawn(node.transform.position - new Vector3(0, 1f, 0)));
     }
 
     private bool TryUpdateNode(Node node, bool back = false, float delay = 0)
