@@ -19,6 +19,10 @@ public class BuyTriesScreen : MonoBehaviour
     [SerializeField] private Game _game;
     [SerializeField] private InGameInput _input;
 
+    [SerializeField] private AnimationCurve _cameraAnimation;
+    [SerializeField] private Transform _finishPos;
+    [SerializeField] private float _cameraSpeed = 1f;
+
     private IPromiseTimer _timer = new PromiseTimer();
     private Color _backColor;
     private int _level;
@@ -27,9 +31,10 @@ public class BuyTriesScreen : MonoBehaviour
 
     public void Appear(int level)
     {
+        //TODO: тут крч луз панель нахуй блять
         Color startColor = new Color(_backColor.r, _backColor.g, _backColor.b, 0);
         _background.color = startColor;
-
+        
         float fadeDuration = 1f;
         _timer.WaitWhile(time =>
         {
@@ -56,6 +61,33 @@ public class BuyTriesScreen : MonoBehaviour
         _canvas.interactable = true;
         _canvas.blocksRaycasts = true;
     }
+
+    private void GoBattle()
+    {
+        print("Battle");
+
+        StartCoroutine(CameraMove());
+        
+    }
+
+    private IEnumerator CameraMove()
+    {
+        float progress = 0f;
+
+        var startPos = Camera.main.transform;
+
+        while (progress < 1)
+        {
+            
+            Camera.main.transform.position = Vector3.Lerp(startPos.position, _finishPos.position, _cameraAnimation.Evaluate(progress));
+           
+            Camera.main.transform.rotation = Quaternion.Lerp(startPos.rotation, _finishPos.rotation, _cameraAnimation.Evaluate(progress));
+            progress += Time.deltaTime * _cameraSpeed; 
+            yield return null;
+        }
+       
+    }
+
 
     public void Hide()
     {
@@ -113,10 +145,14 @@ public class BuyTriesScreen : MonoBehaviour
     {
         if (tries == 0)
         {
-            Appear(_level);
+           
+            //Appear(_level);
             _input.IsON = false;
             _canvas.interactable = true;
             _canvas.blocksRaycasts = true;
+
+            GoBattle();
+
         }
     }
 

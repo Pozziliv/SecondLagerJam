@@ -178,11 +178,13 @@ public class Game : MonoBehaviour
             StartCoroutine(FinishGame());
             _levelComplete = true;
             LevelCompleted?.Invoke();
+            
         }
     }
 
     private IEnumerator FinishGame()
     {
+
         int level = DB.GetLevel();
         Dictionary<string, object> eventParameters = new Dictionary<string, object>
         {

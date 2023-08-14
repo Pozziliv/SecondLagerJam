@@ -11,6 +11,8 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private Color _countColor;
 
+    [SerializeField] private AnimalStats _stats;
+
     private Animator _animator;
     private Outline _outline;
     private Damping _damp = new Damping(0.5f, 2, 0, 1);
