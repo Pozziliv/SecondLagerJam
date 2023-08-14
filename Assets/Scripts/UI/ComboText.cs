@@ -44,6 +44,8 @@ public class ComboText : MonoBehaviour
 
     public void Increase(int value = 1)
     {
+        Debug.Log("Increase");
+
         if (_locked)
             return;
 
