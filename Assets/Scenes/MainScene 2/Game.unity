@@ -470,7 +470,7 @@ Transform:
   m_GameObject: {fileID: 191105588}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.92387956, z: 0.38268343, w: 0}
-  m_LocalPosition: {x: 0, y: 27, z: -70}
+  m_LocalPosition: {x: 0, y: 27, z: -50}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6304,6 +6304,11 @@ PrefabInstance:
       propertyPath: _finishPos
       value: 
       objectReference: {fileID: 191105589}
+    - target: {fileID: 236631744362168491, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
+        type: 3}
+      propertyPath: _cameraSpeed
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 236631744362168491, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
         type: 3}
       propertyPath: _cameraAnimation.m_Curve.Array.size

@@ -64,7 +64,7 @@ public class BuyTriesScreen : MonoBehaviour
 
     private void GoBattle()
     {
-        print("Battle");
+        
 
         StartCoroutine(CameraMove());
         
