@@ -1,12 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Element
+namespace Assets.Scripts.Battle
 {
     public class Element : MonoBehaviour
     {
 
-        enum Name
+        public enum Name
         {
             Neutral = 0,
             Fire = 1,

@@ -1,7 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Element
+namespace Assets.Scripts.Battle
+
 {
     public class SlimeAttack : MonoBehaviour
     {
