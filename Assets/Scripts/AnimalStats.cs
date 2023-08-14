@@ -6,5 +6,6 @@ using UnityEngine;
 public class AnimalStats : MonoBehaviour
 {  
     [SerializeField] private Elements _elementName;
-    public float Health;
+    public float CurrentHealth;
+    public float MaxHealth;
 }

@@ -19,7 +19,7 @@ public class Aviary : MonoBehaviour
     [SerializeField] private Game _game;
     [SerializeField] private DamageCounter _damageCounter;
 
-    private Stack<Animal>  _animals = new Stack<Animal>();
+    public Stack<Animal>  _animals = new Stack<Animal>();
     private IPromiseTimer _promiseTimer = new PromiseTimer();
     private ComboContainer _comboContainer;
 
@@ -41,6 +41,12 @@ public class Aviary : MonoBehaviour
     public void PlayConfetti() => _confetti.Play();
 
     public void CloseDoor() => _door.Close();
+
+    private void Start()
+    {
+        _game = FindAnyObjectByType<Game>();
+        _damageCounter = FindAnyObjectByType<DamageCounter>();
+    }
 
     private void OnEnable()
     {
@@ -254,5 +260,13 @@ public class Aviary : MonoBehaviour
                 ((int)item.Element % 3 + 1 == (int)_game.BossElement) ? 2 : 0.5f);
         }
         return (int)damage;
+    }
+
+    public void GetDamageAnimation()
+    {
+        foreach(var item in _animals)
+        {
+            item._animator.SetBool("Attack", true);
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Assets.Scripts.Battle
     public class Boss : MonoBehaviour
     {
 
-        public float Healt = 100f;
+        public float Health = 100f;
 
         private Animator _animator;
 
