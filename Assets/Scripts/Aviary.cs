@@ -102,6 +102,7 @@ public class Aviary : MonoBehaviour
         foreach (var animal in newAnimals)
         {
             _animals.Push(animal);
+            
             int sideDelta = _animals.Count % 2 == 0 ? 1 : -1;
             Vector3 position = transform.position - transform.forward * (2 + maxDelta - i * _movePerAnimal) + transform.right * sideDelta;
             animal.MoveToAviary(this, 0.5f, position);
