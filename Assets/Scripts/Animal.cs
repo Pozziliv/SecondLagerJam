@@ -104,7 +104,7 @@ public class Animal : MonoBehaviour
 
     private IPromise Move(Vector3 targetPosition, float duration)
     {
-        _animator.SetBool("isMoving", true);
+        _animator.SetBool("Jump", true);
 
         Vector3 position = transform.position;
         Quaternion rotation = transform.rotation;
@@ -122,7 +122,7 @@ public class Animal : MonoBehaviour
         }).Then(() =>
         {
             promise.Resolve();
-            _animator.SetBool("isMoving", false);
+            _animator.SetBool("Jump", false);
         });
 
         return promise;
@@ -159,11 +159,11 @@ public class Animal : MonoBehaviour
     {
         SmoothPath path = new SmoothPath(transform.position, target, new Vector3[] { _aviaryDoorPosition }, Vector3.forward, target - _aviaryDoorPosition, 2f);
         var promise = new Promise();
-        _animator.SetBool("isMoving", true);
+        _animator.SetBool("Jump", true);
         MoveAlongPath(path, 0.5f).Then(() =>
         {
             transform.position = target;
-            _animator.SetBool("isMoving", false);
+            _animator.SetBool("Jump", false);
             RotateBack(0.2f);
             promise.Resolve();
         });
@@ -175,11 +175,11 @@ public class Animal : MonoBehaviour
         _aviaryDoorPosition = aviary.DoorPosition;
         SmoothPath path = new SmoothPath(transform.position, targetPosition, new Vector3[] { aviary.DoorPosition + aviary.transform.forward * 5 }, transform.forward, transform.forward, 3f);
         var promise = new Promise();
-        _animator.SetBool("isMoving", true);
+        _animator.SetBool("Jump", true);
         MoveAlongPath(path, duration).Then(() =>
         {
             transform.position = targetPosition;
-            _animator.SetBool("isMoving", false);
+            _animator.SetBool("Jump", false);
             RotateBack(0.2f);
             promise.Resolve();
         });
