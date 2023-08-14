@@ -7,6 +7,7 @@ using Agava.YandexGames;
 using Agava.YandexGames.Utility;
 using UnityEngine.Analytics;
 using Lean.Localization;
+using Assets.Scripts.Slime;
 
 public class Game : MonoBehaviour
 {
@@ -23,6 +24,7 @@ public class Game : MonoBehaviour
     [SerializeField] private ParticleSystem[] _finishEffects;
     [SerializeField] private Tries _tries;
     [SerializeField] private List<LevelType> _levelTypes;
+    [SerializeField] private List<SlimeLevelType> _slimeLevelTypes;
     [SerializeField] private Leaderboard _totalScoreLeaderboard;
     [SerializeField] private LeanToken _levelToken;
 
@@ -32,6 +34,7 @@ public class Game : MonoBehaviour
     private bool _levelComplete;
 
     public event UnityAction<int, LevelType> LevelStarted;
+    public event UnityAction<int, SlimeLevelType> SlimeLevelStarted;
     public event UnityAction LevelCompleted;
 
     private void Awake()
@@ -97,6 +100,26 @@ public class Game : MonoBehaviour
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
+//    private void StartLevel()
+//    {
+//#if !UNITY_EDITOR && UNITY_WEBGL
+//        InterestialAd.Show();
+//#endif
+//        _level = DB.GetLevel();
+//        _levelToken.SetValue(_level);
+//        int rows = 1 + ((_level - 1) % _levelsPerScene + 1) * 2;
+//        int cols = 4;
+//        var typeIndex = ((DB.GetLevel() - 1) / _levelsPerScene) % _levelTypes.Count;
+//        LevelStarted?.Invoke(_level, _levelTypes[typeIndex]);
+//        _net.BuildLevel(rows, cols);
+//        Dictionary<string, object> eventParameters = new Dictionary<string, object>
+//        {
+//            { "Level number",  _level},
+//        };
+
+//        eventParameters.Clear();
+//    }
+
     private void StartLevel()
     {
 #if !UNITY_EDITOR && UNITY_WEBGL
@@ -107,7 +130,7 @@ public class Game : MonoBehaviour
         int rows = 1 + ((_level - 1) % _levelsPerScene + 1) * 2;
         int cols = 4;
         var typeIndex = ((DB.GetLevel() - 1) / _levelsPerScene) % _levelTypes.Count;
-        LevelStarted?.Invoke(_level, _levelTypes[typeIndex]);
+        SlimeLevelStarted?.Invoke(_level, _slimeLevelTypes[typeIndex]);
         _net.BuildLevel(rows, cols);
         Dictionary<string, object> eventParameters = new Dictionary<string, object>
         {
