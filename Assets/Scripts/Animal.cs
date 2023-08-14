@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using RSG;
+using Assets.Scripts.Battle;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Outline))]
@@ -12,6 +13,11 @@ public class Animal : MonoBehaviour
     [SerializeField] private Color _countColor;
 
     [SerializeField] private AnimalStats _stats;
+
+    [Range(1f, 3f)]
+    [SerializeField] int _level;
+
+    [SerializeField] private Elements _element;
 
     private Animator _animator;
     private Outline _outline;
@@ -27,6 +33,9 @@ public class Animal : MonoBehaviour
     private Coroutine _pressTask;
     private Coroutine _shakeTask;
 
+
+    public int Level => _level;
+    public Elements Element => _element;
     public int ID => _id;
     public Color CountColor => _countColor;
     public Vector3 TargetPosition { get; private set; }
