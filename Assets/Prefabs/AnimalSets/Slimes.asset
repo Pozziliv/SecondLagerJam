@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ead16738e0268ea4eb87728cc76b17b9, type: 3}
+  m_Name: Slimes
+  m_EditorClassIdentifier: 
+  _animals:
+  - {fileID: 801897267022355593, guid: 3c0ed350cf62893439d2dfbe08d3f83f, type: 3}
+  - {fileID: 7342248939313650227, guid: 316f74248289e6842875fd0c314bcdfb, type: 3}
+  - {fileID: 331385342715455664, guid: 38177fdde29ea1648adc57a476d93c5e, type: 3}
+  - {fileID: -3905034896714919403, guid: dbf32ea53db5a154baba4fd266e13043, type: 3}
+  - {fileID: -5227642124329028691, guid: 7f2aa3f31ec74c54390d1adeddf9eb65, type: 3}
+  - {fileID: 4198016067047061765, guid: 78dc2f480c1d55c4bb227c18cbadcaf7, type: 3}
+  - {fileID: -1821444351251716690, guid: cd6b2c817ffc89b4aa54255ce4e9a973, type: 3}
+  - {fileID: 132245848549297834, guid: 495b84ab3d583924cae3a6d671fc7333, type: 3}
+  - {fileID: -32978725689523239, guid: 34929e37b585c5e4da7218b853105d24, type: 3}
