@@ -6,6 +6,8 @@ using UnityEngine.AI;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using RSG;
+using System;
+using Assets.Scripts.Slime;
 
 public class Aviary : MonoBehaviour
 {
@@ -14,12 +16,15 @@ public class Aviary : MonoBehaviour
     [SerializeField] private ComboText _comboText;
     [SerializeField] private Image _comboImage;
     [SerializeField] private ParticleSystem _confetti;
+    [SerializeField] private Game _game;
+    [SerializeField] private DamageCounter _damageCounter;
 
     private Stack<Animal>  _animals = new Stack<Animal>();
     private IPromiseTimer _promiseTimer = new PromiseTimer();
     private ComboContainer _comboContainer;
 
     public Vector3 DoorPosition => _door.transform.position;
+
     public ComboText ComboText => _comboText;
     public bool HasAnimals => _animals.Count > 0;
     public int AnimalID => _animals.Count > 0 ? _animals.Peek().ID : -100;
@@ -114,7 +119,7 @@ public class Aviary : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
-
+        _damageCounter.UpdateDamage();
         _promiseTimer.WaitFor(0.4f).Then(() =>
         {
             _door.Close();
@@ -232,5 +237,22 @@ public class Aviary : MonoBehaviour
     private void Update()
     {
         _promiseTimer.Update(Time.deltaTime);
+    }
+
+    public List<Animal> GetAnimals()
+    {
+        return _animals.ToList();
+    }
+
+    internal int GetAnimalsDamage()
+    {
+        float damage = 0;
+        foreach(var item in _animals)
+        {
+            damage += (10 /*Base Damage*/ + item.Level * 5) * 
+                (((int)item.Element == (int)_game.BossElement || (int)item.Element == 0) ? 1 : 
+                ((int)item.Element % 3 + 1 == (int)_game.BossElement) ? 2 : 0.5f);
+        }
+        return (int)damage;
     }
 }
