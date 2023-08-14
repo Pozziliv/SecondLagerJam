@@ -36,26 +36,9 @@ public class Animal : MonoBehaviour
         _baseScale = transform.localScale;
     }
 
-    private void Start()
-    {
-        StartCoroutine(RandomIdle());
-    }
-
     private void Update()
     {
         _timer.Update(Time.deltaTime);
-    }
-
-    private IEnumerator RandomIdle()
-    {
-        while (enabled)
-        {
-            yield return new WaitForSeconds(Random.Range(5f, 10f));
-
-            string[] triggers = new string[] { "lookLeft", "lookRight", "munch", "munch", "munch", "munch", "munch", "munch" };
-            _animator.SetTrigger(triggers[Random.Range(0, triggers.Length)]);
-
-        }
     }
 
     public void SetID(int ID)
@@ -79,7 +62,6 @@ public class Animal : MonoBehaviour
 
     public void Shake()
     {
-        PlayAnimation("fear");
         if (_shakeTask != null)
         {
             StopCoroutine(_shakeTask);
@@ -104,7 +86,6 @@ public class Animal : MonoBehaviour
 
     private IPromise Move(Vector3 targetPosition, float duration)
     {
-        _animator.SetBool("Jump", true);
 
         Vector3 position = transform.position;
         Quaternion rotation = transform.rotation;

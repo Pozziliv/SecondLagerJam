@@ -144,50 +144,49 @@ public class Aviary : MonoBehaviour
         int newAnimalsID = newAnimals[0].ID;
         if (newAnimals.Count != _animals.Count)
         {
-            if (_animals.Where(item => item.ID == newAnimalsID).ToArray().Length == _animals.Count)
-            {
-                string animation = newAnimals.Count > 3 ? "spin" : "bounce";
-                animation = "bounce";
+            /*if (_animals.Where(item => item.ID == newAnimalsID).ToArray().Length == _animals.Count)
+            {*/
+                string animation = newAnimals.Count > 3 ? "Jump" : "Attack";
                 foreach (Animal animal in _animals)
                     animal.PlayAnimation(animation);
                 if (newAnimals.Count > 4)
                     VeryNiceMove?.Invoke();
                 else if (newAnimals.Count >= 1)
                     NiceMove?.Invoke();
-            }
+            /*}
             else
             {
                 foreach (Animal animal in _animals)
-                    animal.PlayAnimation("fear");
+                    animal.PlayAnimation("Idle");
 
                 int count = GetSameAnimalsInRowCount();
                 BadMove?.Invoke();
                 ReleaseAnimals(count);
-            }
+            }*/
         }
         else
         {
             Aviary[] aviaries = FindObjectsOfType<Aviary>();
             bool canGet = true;
-            foreach (var item in aviaries)
+            /*foreach (var item in aviaries)
                 if (item != this && item.HasAnimals && item.AnimalID == newAnimalsID)
-                    canGet = false;
+                    canGet = false;*/
             if (canGet)
             {
                 if (newAnimals.Count > 4)
                     VeryNiceMove?.Invoke();
                 else if (newAnimals.Count >= 1)
                     NiceMove?.Invoke();
-            }
+            }/*
             else
             {
                 foreach (Animal animal in _animals)
-                    animal.PlayAnimation("fear");
+                    animal.PlayAnimation("Idle");
                 Interacted?.Invoke(this);
                 BadMove?.Invoke();
                 int count = GetSameAnimalsInRowCount();
                 ReleaseAnimals(count);
-            }
+            }*/
         }
         Interacted?.Invoke(this);
     }

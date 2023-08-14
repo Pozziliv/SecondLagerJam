@@ -42,13 +42,13 @@ public class Node : MonoBehaviour
         _animal = animal;
         if (fromAviary)
         {
-            _animal.MoveFromAviary(transform.position);
+            _animal.MoveFromAviary(transform.position - new Vector3(0, 0.5f, 0));
         }
         else
         {
             _timer.WaitFor(delay).Then(() =>
             {
-                _animal.Go(transform.position, 0.5f);
+                _animal.Go(transform.position - new Vector3(0, 0.5f, 0), 0.5f);
             });
         }
     }
