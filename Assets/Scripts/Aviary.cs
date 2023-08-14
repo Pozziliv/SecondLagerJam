@@ -39,16 +39,16 @@ public class Aviary : MonoBehaviour
 
     private void OnEnable()
     {
-        NiceMove += OnNiceMove;
+        /*NiceMove += OnNiceMove;
         VeryNiceMove += OnNiceMove;
-        BadMove += OnBadMove;
+        BadMove += OnBadMove;*/
     }
 
     private void OnDisable()
     {
-        NiceMove -= OnNiceMove;
-        VeryNiceMove -= OnNiceMove;
-        BadMove -= OnBadMove;
+        /*NiceMove -= OnNiceMove;
+        /*VeryNiceMove -= OnNiceMove;
+        BadMove -= OnBadMove;*/
     }
 
     private void OnNiceMove()
@@ -68,6 +68,7 @@ public class Aviary : MonoBehaviour
     
     public bool TryTakeGroup(List<Node> nodes)
     {
+        Debug.Log("TryTakeGroup");
         List<Node> sortedNodes = nodes.OrderBy(item => Vector3.Distance(item.transform.position, transform.position)).ToList();
         List<Animal> newAnimals = new List<Animal>();
         for (int i = 0; i < sortedNodes.Count; i++)
@@ -87,19 +88,21 @@ public class Aviary : MonoBehaviour
             if (item != this && item.HasAnimals && item.AnimalID == newAnimals[0].ID)
                 inOtherAviary = true;
         bool sameAnimals = _animals.Count == 0 || newAnimals[0].ID == _animals.Peek().ID;
-        StartCoroutine(AddAnimalsLoop(newAnimals, sameAnimals && inOtherAviary == false));
+        StartCoroutine(AddAnimalsLoop(newAnimals, true));
 
         return sameAnimals;
     }
 
     private IEnumerator AddAnimalsLoop(List<Animal> newAnimals, bool sameAnimals)
     {
+        Debug.Log("AddAnimalsLoop");
         MoveAnimals(newAnimals.Count * _movePerAnimal);
         float maxDelta = _movePerAnimal * (newAnimals.Count - 1);
         int i = 0;
         foreach (var animal in newAnimals)
         {
             _animals.Push(animal);
+            
             int sideDelta = _animals.Count % 2 == 0 ? 1 : -1;
             Vector3 position = transform.position - transform.forward * (2 + maxDelta - i * _movePerAnimal) + transform.right * sideDelta;
             animal.MoveToAviary(this, 0.5f, position);
@@ -132,9 +135,9 @@ public class Aviary : MonoBehaviour
 
     private void UpdateCounter(int value, Color color, bool sameAnimals)
     {
-        //_comboImage.color = color;
-        //_comboText.QuickReset();
-        //_comboText.Increase(value);
+        /*_comboImage.color = color;
+        _comboText.QuickReset();
+        _comboText.Increase(value);*/
         if (sameAnimals)
             GotAnimal?.Invoke(this);
     }
@@ -142,53 +145,52 @@ public class Aviary : MonoBehaviour
     private void ReactOnNewAnimals(List<Animal> newAnimals)
     {
         int newAnimalsID = newAnimals[0].ID;
-        if (newAnimals.Count != _animals.Count)
+        /*if (_animals.Where(item => item.ID == newAnimalsID).ToArray().Length == _animals.Count)
         {
-            if (_animals.Where(item => item.ID == newAnimalsID).ToArray().Length == _animals.Count)
-            {
-                string animation = newAnimals.Count > 3 ? "spin" : "bounce";
-                animation = "bounce";
+            */
+            Debug.Log("ReactOnNewAnimals");
+                string animation = "Jump";
                 foreach (Animal animal in _animals)
                     animal.PlayAnimation(animation);
                 if (newAnimals.Count > 4)
                     VeryNiceMove?.Invoke();
                 else if (newAnimals.Count >= 1)
                     NiceMove?.Invoke();
-            }
+            /*}
             else
             {
                 foreach (Animal animal in _animals)
-                    animal.PlayAnimation("fear");
+                    animal.PlayAnimation("Idle");
 
                 int count = GetSameAnimalsInRowCount();
                 BadMove?.Invoke();
                 ReleaseAnimals(count);
-            }
-        }
+            }*//*
+        }*//*
         else
         {
             Aviary[] aviaries = FindObjectsOfType<Aviary>();
             bool canGet = true;
-            foreach (var item in aviaries)
+            *//*foreach (var item in aviaries)
                 if (item != this && item.HasAnimals && item.AnimalID == newAnimalsID)
-                    canGet = false;
-            if (canGet)
-            {
+                    canGet = false;*/
+            /*if (canGet)
+            {*//*
                 if (newAnimals.Count > 4)
                     VeryNiceMove?.Invoke();
                 else if (newAnimals.Count >= 1)
                     NiceMove?.Invoke();
-            }
+            *//*}
             else
             {
                 foreach (Animal animal in _animals)
-                    animal.PlayAnimation("fear");
+                    animal.PlayAnimation("Idle");
                 Interacted?.Invoke(this);
                 BadMove?.Invoke();
                 int count = GetSameAnimalsInRowCount();
                 ReleaseAnimals(count);
-            }
-        }
+            }*//*
+        }*/
         Interacted?.Invoke(this);
     }
 
@@ -198,13 +200,9 @@ public class Aviary : MonoBehaviour
             return 0;
 
         int count = 0;
-        int prevID = _animals.Peek().ID;
         foreach (var item in _animals)
         {
-            if (item.ID == prevID)
-                count++;
-            else
-                break;
+            count++;
         }
 
         return count;

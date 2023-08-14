@@ -23,7 +23,7 @@ public class LoseScreen : MonoBehaviour
     {
         Color startColor = new Color(_backColor.r, _backColor.g, _backColor.b, 0);
         _background.color = startColor;
-
+        
         float fadeDuration = 1f;
         _timer.WaitWhile(time =>
         {
@@ -79,6 +79,7 @@ public class LoseScreen : MonoBehaviour
         {
             _canvas.interactable = true;
             _canvas.blocksRaycasts = true;
+            Debug.Log("я сасатель");
             Appear(_level);
             _input.IsON = false;
         }
