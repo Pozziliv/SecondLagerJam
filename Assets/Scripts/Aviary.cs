@@ -122,7 +122,7 @@ public class Aviary : MonoBehaviour
         }
         //TODO: упдэйт дамаге
         _damageCounter.UpdateDamage();
-        _game.StartMovePlusText(_damageCounter.GetDamage());
+        _game.DoneScore(_damageCounter.GetDamage());
         _promiseTimer.WaitFor(0.4f).Then(() =>
         {
             _door.Close();

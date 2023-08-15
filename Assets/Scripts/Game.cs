@@ -173,11 +173,21 @@ public class Game : MonoBehaviour
         }
     }
 
-    public void StartMovePlusText(int score)
+    public void DoneScore(int score)
     {
-        
+        if (_lastAviary != null)
+        {
+            if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
+                _plusText.transform.position = Camera.main.WorldToScreenPoint(_lastAviary.DoorPosition + _lastAviary.transform.forward * 2.5f);
+            else
+                _plusText.transform.position = _lastAviary.DoorPosition + _lastAviary.transform.forward * 3.5f + _lastAviary.transform.up * 4.5f;
+            print($"DoneCombo: {score}");
+            _plusText.Show("+" + score.ToString());
+        }
         StartCoroutine(MovePlusText(_plusText, 0.4f, score));
     }
+
+    
 
     private void OnAnimalsChanged(int count)
     {
