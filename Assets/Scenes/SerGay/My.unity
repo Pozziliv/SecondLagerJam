@@ -3904,7 +3904,7 @@ PrefabInstance:
     - target: {fileID: 236631744151005187, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 405.23303
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 236631744151005187, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
         type: 3}
@@ -4064,7 +4064,7 @@ PrefabInstance:
     - target: {fileID: 236631744841651299, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 405.233
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 236631744841651299, guid: aa173dd1ba8c4bc4e9e7de080eaa8ca2,
         type: 3}
@@ -6113,6 +6113,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _text: {fileID: 1473034579}
+  _aviaryList: []
 --- !u!114 &1553092286
 MonoBehaviour:
   m_ObjectHideFlags: 0
