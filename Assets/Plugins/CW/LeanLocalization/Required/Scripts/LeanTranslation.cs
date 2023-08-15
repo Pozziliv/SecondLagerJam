@@ -114,14 +114,14 @@ namespace Lean.Localization
 								var token = default(LeanToken);
 
 								// Try and replace local tokens first
-								if (buffer.Length > 0 && localTokenRoot != null && LeanLocalToken.TryGetLocalToken(localTokenRoot, buffer.ToString(), ref token) == true) // TODO: Avoid ToString here?
+								if (buffer.Length > 0 && localTokenRoot != null && LeanLocalToken.TryGetLocalToken(localTokenRoot, buffer.ToString(), ref token) == true) //  Avoid ToString here?
 								{
 									current.Append(token.Value);
 
 									tokens.Add(token);
 								}
 								// Try and replace global tokens second
-								else if (buffer.Length > 0 && LeanLocalization.CurrentTokens.TryGetValue(buffer.ToString(), out token) == true) // TODO: Avoid ToString here?
+								else if (buffer.Length > 0 && LeanLocalization.CurrentTokens.TryGetValue(buffer.ToString(), out token) == true) //  Avoid ToString here?
 								{
 									current.Append(token.Value);
 

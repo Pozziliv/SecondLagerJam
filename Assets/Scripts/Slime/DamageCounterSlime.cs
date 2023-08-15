@@ -40,5 +40,10 @@ namespace Assets.Scripts.Slime
             }
             _text.text = _damage.ToString();
         }
+
+        public int GetDamage()
+        {
+            return _damage;
+        }
     }
 }

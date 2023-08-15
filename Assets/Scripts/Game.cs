@@ -8,6 +8,7 @@ using Agava.YandexGames.Utility;
 using UnityEngine.Analytics;
 using Lean.Localization;
 using Assets.Scripts.Battle;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Game : MonoBehaviour
 {
@@ -150,7 +151,7 @@ public class Game : MonoBehaviour
             Vector3 worldSpacePosition = aviary.DoorPosition + aviary.transform.forward * 2.5f + aviary.transform.up * 4;
             _combo.transform.position = worldSpacePosition;
         }
-
+        //TODO: »ксы1
         _combo.Increase();
     }
 
@@ -165,11 +166,17 @@ public class Game : MonoBehaviour
                     _plusText.transform.position = Camera.main.WorldToScreenPoint(_lastAviary.DoorPosition + _lastAviary.transform.forward * 2.5f);
                 else
                     _plusText.transform.position = _lastAviary.DoorPosition + _lastAviary.transform.forward * 3.5f + _lastAviary.transform.up * 4.5f;
-
+                print($"DoneCombo: {score}");
                 _plusText.Show("+" + score.ToString());
             }
             StartCoroutine(MovePlusText(_plusText, 0.4f, score));
         }
+    }
+
+    public void StartMovePlusText(int score)
+    {
+        
+        StartCoroutine(MovePlusText(_plusText, 0.4f, score));
     }
 
     private void OnAnimalsChanged(int count)
@@ -233,7 +240,7 @@ public class Game : MonoBehaviour
             yield return null;
             time += Time.deltaTime;
         }
-
+        //TODO: »ксы 2
         _score.Increase(score);
     }
 
