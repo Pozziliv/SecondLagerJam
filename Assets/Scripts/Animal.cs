@@ -12,7 +12,7 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private Color _countColor;
 
-    [SerializeField] private AnimalStats _stats;
+    [SerializeField] public AnimalStats _stats;
 
     [Range(1f, 3f)]
     [SerializeField] int _level;

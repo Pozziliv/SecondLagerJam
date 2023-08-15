@@ -310,6 +310,9 @@ MonoBehaviour:
   _id: 0
   _countColor: {r: 0.4716981, g: 0.4716981, b: 0.4716981, a: 1}
   _stats: {fileID: 4691940498599600728}
+  _level: 0
+  _element: 0
+  _animator: {fileID: 0}
 --- !u!114 &4691940498599600728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -323,7 +326,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 0
-  Health: 20
+  CurrentHealth: 25
+  MaxHealth: 25
 --- !u!65 &-7059407084342328144
 BoxCollider:
   m_ObjectHideFlags: 0

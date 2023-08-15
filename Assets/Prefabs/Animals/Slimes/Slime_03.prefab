@@ -281,6 +281,7 @@ MonoBehaviour:
   _stats: {fileID: -2147532199558167462}
   _level: 2
   _element: 0
+  _animator: {fileID: 0}
 --- !u!114 &-2147532199558167462
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,7 +295,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _elementName: 1
-  Health: 20
+  CurrentHealth: 25
+  MaxHealth: 25
 --- !u!65 &-223124852150173301
 BoxCollider:
   m_ObjectHideFlags: 0

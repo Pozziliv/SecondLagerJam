@@ -267,6 +267,7 @@ public class Aviary : MonoBehaviour
         foreach(var item in _animals)
         {
             item._animator.SetBool("Attack", true);
+            
         }
     }
 }
