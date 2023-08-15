@@ -19,8 +19,11 @@ public class Animal : MonoBehaviour
     [SerializeField] int _level;
 
     [SerializeField] private Elements _element;
-
+    //sddsad
+    //sd
     [SerializeField] private List<GameObject> _particles = new List<GameObject>();
+
+    private float _sss;
 
     public Animator _animator;
     private Outline _outline;
