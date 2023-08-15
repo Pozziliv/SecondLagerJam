@@ -51,6 +51,24 @@ public class Animal : MonoBehaviour
         _baseScale = transform.localScale;
     }
 
+    private void Start()
+    {
+        int rndElementIndex = UnityEngine.Random.Range(0, 4);
+        _element = (Elements)rndElementIndex;
+        ChangeParticle();
+    }
+
+    private void ChangeParticle()
+    {
+        switch (_element)
+        {
+            case Elements.Neutral: break;
+            case Elements.Fire: _particles[0].SetActive(true); break;
+            case Elements.Wood: _particles[1].SetActive(true); break;
+            case Elements.Water: _particles[2].SetActive(true); break;
+        }
+    }
+
     private void Update()
     {
         _timer.Update(Time.deltaTime);
