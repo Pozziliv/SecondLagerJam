@@ -15,6 +15,8 @@ public class Slimes : MonoBehaviour
 
     private Boss _boss;
 
+    public int AnimalCount => animals.Count;
+
     private void Awake()
     {
         _aviaryList = GameObject.FindObjectsOfType<Aviary>().ToList();
@@ -30,6 +32,23 @@ public class Slimes : MonoBehaviour
         foreach (var aviary in _aviaryList)
             foreach(var animal in aviary.GetAnimals())
                 animals.Enqueue(animal);
+    }
+
+    public int GetDamagableCount()
+    {
+        int damage = 0;
+        int count = 0;
+        foreach (var aviary in _aviaryList)
+            foreach (var animal in aviary.GetAnimals())
+            {
+                count++;
+                damage += (int)((10 /*Base Damage*/ + animal.Level * 5) *
+                    (((int)animal.Element == (int)_boss.Element || (int)animal.Element == 0) ? 1 :
+                    ((int)animal.Element % 3 + 1 == (int)_boss.Element) ? 2 : 0.5f));
+                if (damage >= _boss.Health)
+                    return count;
+            }
+        return count;
     }
 
     public void MoveToBattlePos()
@@ -53,12 +72,16 @@ public class Slimes : MonoBehaviour
     {
         foreach (var animal in animals)
         {
-            animal.Attack(0.1f, _bossPos.position);
-            yield return new WaitForSeconds(0.05f);
-            _boss.TakeDamage((10 /*Base Damage*/ + animal.Level * 5) *
+            Vector3 startPos = animal.transform.position;
+            animal.Attack(0.3f, _bossPos.position);
+            yield return new WaitForSeconds(0.15f);
+            if(_boss.TakeDamage((10 /*Base Damage*/ + animal.Level * 5) *
                 (((int)animal.Element == (int)_boss.Element || (int)animal.Element == 0) ? 1 :
-                ((int)animal.Element % 3 + 1 == (int)_boss.Element) ? 2 : 0.5f));
-            yield return new WaitForSeconds(0.05f);
+                ((int)animal.Element % 3 + 1 == (int)_boss.Element) ? 2 : 0.5f)))
+            {
+                break;
+            }
+            yield return new WaitForSeconds(0.15f);
         }
     }
 }

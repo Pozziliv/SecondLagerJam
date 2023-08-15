@@ -192,13 +192,11 @@ public class Animal : MonoBehaviour
 
     public IPromise Attack(float duration, Vector3 targetPosition)
     {
-        Vector3 startPos = transform.position;
-        SmoothPath path = new SmoothPath(transform.position, startPos, new Vector3[] { targetPosition}, transform.forward, transform.forward, 3f);
+        SmoothPath path = new SmoothPath(transform.position, transform.position, new Vector3[] { targetPosition}, transform.forward, transform.forward, 3f);
         var promise = new Promise();
         _animator.SetBool("Jump", true);
         MoveAlongPath(path, duration).Then(() =>
         {
-            transform.position = targetPosition;
             _animator.SetBool("Jump", false);
             promise.Resolve();
         });

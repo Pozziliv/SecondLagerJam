@@ -7,8 +7,8 @@ namespace Assets.Scripts.Battle
     public class Boss : MonoBehaviour
     {
 
-        [SerializeField] private float _maxHealth = 100f;
-        private float _health;
+        [SerializeField] private int _maxHealth = 100;
+        private int _health;
         [SerializeField] private Image _healthImg;
         private float _imgHeathMultiplyer;
 
@@ -16,20 +16,24 @@ namespace Assets.Scripts.Battle
         public Animator _animator;
 
         [SerializeField] private BossElements _element;
+
+        public int Health => _health;
         public BossElements Element => _element;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _maxHealth *= DB.GetLevel() * 0.75f;
+            _maxHealth *= (int)(DB.GetLevel() * 0.75f);
             _health = _maxHealth;
-            _imgHeathMultiplyer = 1 / _maxHealth;
+            _imgHeathMultiplyer = 1 / (float)_maxHealth;
         }
         
-        public void TakeDamage(float value)
+        public bool TakeDamage(float value)
         {
-            _health -= value;
+            _health -= (int)value;
+            Debug.Log(_health);
             _healthImg.fillAmount = 1 - (_maxHealth - _health) * _imgHeathMultiplyer;
+            return _health <= 0;
         }
     }
 }

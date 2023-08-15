@@ -9,6 +9,7 @@ namespace Assets.Scripts.Battle
     public class BattleSystem : MonoBehaviour
     {
         private Boss _boss;
+        private Boss _spawnedBoss;
         [SerializeField] private Transform _bossSpawnPoint;
 
         [SerializeField] private Game _game;
@@ -33,9 +34,9 @@ namespace Assets.Scripts.Battle
 
         public IEnumerator SetupBattle()
         {
-            Instantiate(_boss, _bossSpawnPoint.position, Quaternion.identity);
+            _spawnedBoss = Instantiate(_boss, _bossSpawnPoint.position, Quaternion.identity);
 
-            _slimes.SetBoss(_boss);
+            _slimes.SetBoss(_spawnedBoss);
             _slimes.GetAllSlimes();
 
             yield return new WaitForSeconds(4f);
@@ -53,7 +54,9 @@ namespace Assets.Scripts.Battle
             
             // Удар по боссу
 
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount());
+
+            Debug.Log("Я заебался, го в арех");
 
             // Проверка жив ли босс если да то передать ход боссу иначе вызов экрана победы
 
