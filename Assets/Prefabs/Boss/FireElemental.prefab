@@ -923,7 +923,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _baseDamage: 50
-  Health: 500
+  Health: 9999999
   MaxHealth: 500
   _element: 1
 --- !u!1 &4455856004737342105

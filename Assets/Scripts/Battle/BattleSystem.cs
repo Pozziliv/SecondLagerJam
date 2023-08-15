@@ -15,7 +15,7 @@ namespace Assets.Scripts.Battle
 
         [SerializeField] private Transform _bossSpawnPoint;
         [SerializeField] private GameObject _bossPrefab;
-
+        //TODO: Тут стоит правильнее настроить вывод какой бос будет на определенном уровне юзая _bossPrefab
 
         private DamageCounter _damageCounter;
         private List<Aviary> _aviaryList = new List<Aviary>();
@@ -119,6 +119,7 @@ namespace Assets.Scripts.Battle
 
             foreach (var aviary in _aviaryList)
             {
+                int i = 0;
                 foreach (var animal in aviary._animals)
                 {
                     if(bossAttackDamage > 0)
@@ -134,7 +135,8 @@ namespace Assets.Scripts.Battle
                             Destroy(animal.gameObject);
                             print("Помер");
                         }
-                    } 
+                    }
+                    i++;
                 }
             }
 
@@ -176,5 +178,9 @@ namespace Assets.Scripts.Battle
         }
 
 
+        
+
     }
+
+    
 }

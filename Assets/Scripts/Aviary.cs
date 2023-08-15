@@ -20,6 +20,7 @@ public class Aviary : MonoBehaviour
     [SerializeField] private DamageCounter _damageCounter;
 
     public Stack<Animal>  _animals = new Stack<Animal>();
+
     private IPromiseTimer _promiseTimer = new PromiseTimer();
     private ComboContainer _comboContainer;
 
