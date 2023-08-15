@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using RSG;
 using System;
 using Assets.Scripts.Slime;
+using Assets.Scripts.Battle;
 
 public class Aviary : MonoBehaviour
 {
@@ -17,6 +18,7 @@ public class Aviary : MonoBehaviour
     [SerializeField] private Image _comboImage;
     [SerializeField] private ParticleSystem _confetti;
     [SerializeField] private Game _game;
+    [SerializeField] private BattleSystem _battleSystem;
     [SerializeField] private DamageCounter _damageCounter;
 
     private Stack<Animal>  _animals = new Stack<Animal>();
@@ -250,8 +252,8 @@ public class Aviary : MonoBehaviour
         foreach(var item in _animals)
         {
             damage += (10 /*Base Damage*/ + item.Level * 5) * 
-                (((int)item.Element == (int)_game.BossElement || (int)item.Element == 0) ? 1 : 
-                ((int)item.Element % 3 + 1 == (int)_game.BossElement) ? 2 : 0.5f);
+                (((int)item.Element == (int)_battleSystem.Element || (int)item.Element == 0) ? 1 : 
+                ((int)item.Element % 3 + 1 == (int)_battleSystem.Element) ? 2 : 0.5f);
         }
         return (int)damage;
     }

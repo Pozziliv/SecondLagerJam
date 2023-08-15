@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using RSG;
 using UnityEngine.Analytics;
 using Lean.Common;
+using Assets.Scripts.Battle;
 
 public class BuyTriesScreen : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class BuyTriesScreen : MonoBehaviour
     [SerializeField] private Tries _tries;
     [SerializeField] private Game _game;
     [SerializeField] private InGameInput _input;
+
+    [SerializeField] private BattleSystem _battleSystem;
 
     [SerializeField] private AnimationCurve _cameraAnimation;
     [SerializeField] private Transform _finishPos;
@@ -64,7 +67,7 @@ public class BuyTriesScreen : MonoBehaviour
 
     private void GoBattle()
     {
-        
+        StartCoroutine(_battleSystem.SetupBattle());
 
         StartCoroutine(CameraMove());
         

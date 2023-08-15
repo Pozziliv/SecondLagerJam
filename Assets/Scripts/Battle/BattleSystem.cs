@@ -8,22 +8,31 @@ namespace Assets.Scripts.Battle
 
     public class BattleSystem : MonoBehaviour
     {
+        private Boss _boss;
+        [SerializeField] private Transform _bossSpawnPoint;
 
-        //TODO: Получить список списков контейнеров игроков или тп
-        //TODO: Прифаб и доступ к босу 
-        //TODO: ТОчка спавна боса
+        [SerializeField] private Game _game;
 
+        public BossElements Element => _boss.Element;
 
-
-        private void Start()
+        private void OnEnable()
         {
-
-            StartCoroutine(SetupBattle());
+            _game.LevelStarted += ChangeBoss;
         }
 
-        IEnumerator SetupBattle()
+        private void OnDisable()
         {
-            //TODO: Инстантиировать боса на нужную точку
+            _game.LevelStarted -= ChangeBoss;
+        }
+
+        private void ChangeBoss(int level, LevelType levelType)
+        {
+            _boss = levelType.BossPrefab;
+        }
+
+        public IEnumerator SetupBattle()
+        {
+            Instantiate(_boss, _bossSpawnPoint.position, Quaternion.identity);
 
             yield return new WaitForSeconds(0.2f);
 

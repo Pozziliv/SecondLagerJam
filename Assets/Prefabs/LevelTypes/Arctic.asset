@@ -15,4 +15,5 @@ MonoBehaviour:
   _set: {fileID: 11400000, guid: 5b153648f096fe249b5a631f131ce770, type: 2}
   _enviroment: {fileID: 9221824796856695083, guid: 21a6e2c1acd75f743b1e38fe9a24269b,
     type: 3}
-  _element: 1
+  _bossPrefab: {fileID: 3905246251047542966, guid: 96e44255d011f5c4a961e18f28e7cb82,
+    type: 3}
