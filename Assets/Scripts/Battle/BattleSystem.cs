@@ -8,6 +8,7 @@ namespace Assets.Scripts.Battle
 
     public class BattleSystem : MonoBehaviour
     {
+        
         private Boss _boss;
         private Boss _spawnedBoss;
         [SerializeField] private Transform _bossSpawnPoint;
