@@ -17,8 +17,13 @@ public class Animal : MonoBehaviour
     [SerializeField] int _level = 1;
 
     [SerializeField] private Elements _element;
+    //sddsad
+    //sd
+    [SerializeField] private List<GameObject> _particles = new List<GameObject>();
 
-    private Animator _animator;
+    private float _sss;
+
+    public Animator _animator;
     private Outline _outline;
     private Damping _damp = new Damping(0.5f, 2, 0, 1);
     private Damping _errorDamp = new Damping(0.1f, 5, 0, 3);
