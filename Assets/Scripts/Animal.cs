@@ -12,10 +12,8 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private Color _countColor;
 
-    [SerializeField] private AnimalStats _stats;
-
     [Range(1f, 3f)]
-    [SerializeField] int _level;
+    [SerializeField] int _level = 1;
 
     [SerializeField] private Elements _element;
 
@@ -173,6 +171,35 @@ public class Animal : MonoBehaviour
             transform.position = targetPosition;
             _animator.SetBool("Jump", false);
             RotateBack(0.2f);
+            promise.Resolve();
+        });
+        return promise;
+    }
+
+    public IPromise MoveToBattlePos(float duration, Vector3 targetPosition)
+    {
+        SmoothPath path = new SmoothPath(transform.position, targetPosition, new Vector3[] { targetPosition - transform.position }, transform.forward, transform.forward, 3f);
+        var promise = new Promise();
+        _animator.SetBool("Jump", true);
+        MoveAlongPath(path, duration).Then(() =>
+        {
+            transform.position = targetPosition;
+            _animator.SetBool("Jump", false);
+            promise.Resolve();
+        });
+        return promise;
+    }
+
+    public IPromise Attack(float duration, Vector3 targetPosition)
+    {
+        Vector3 startPos = transform.position;
+        SmoothPath path = new SmoothPath(transform.position, startPos, new Vector3[] { targetPosition}, transform.forward, transform.forward, 3f);
+        var promise = new Promise();
+        _animator.SetBool("Jump", true);
+        MoveAlongPath(path, duration).Then(() =>
+        {
+            transform.position = targetPosition;
+            _animator.SetBool("Jump", false);
             promise.Resolve();
         });
         return promise;

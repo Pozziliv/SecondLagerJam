@@ -12,6 +12,7 @@ namespace Assets.Scripts.Battle
         [SerializeField] private Transform _bossSpawnPoint;
 
         [SerializeField] private Game _game;
+        [SerializeField] private Slimes _slimes;
 
         public BossElements Element => _boss.Element;
 
@@ -34,17 +35,25 @@ namespace Assets.Scripts.Battle
         {
             Instantiate(_boss, _bossSpawnPoint.position, Quaternion.identity);
 
-            yield return new WaitForSeconds(0.2f);
+            _slimes.SetBoss(_boss);
+            _slimes.GetAllSlimes();
+
+            yield return new WaitForSeconds(4f);
+
+            _slimes.MoveToBattlePos();
+
+            yield return new WaitForSeconds(1.5f);
 
             StartCoroutine(PlayerAttack());
         }
 
         IEnumerator PlayerAttack()
         {
-            // Проверка жив ли босс
+            StartCoroutine(_slimes.Attack());
+            
             // Удар по боссу
 
-            yield return new WaitForSeconds(0.3f);
+            yield return new WaitForSeconds(0.1f);
 
             // Проверка жив ли босс если да то передать ход боссу иначе вызов экрана победы
 
