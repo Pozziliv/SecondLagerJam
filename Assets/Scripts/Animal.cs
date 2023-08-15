@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using RSG;
 using Assets.Scripts.Battle;
+using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Outline))]
@@ -118,6 +119,26 @@ public class Animal : MonoBehaviour
         return promise;
     }
 
+    internal IPromise Die(float duration)
+    {
+        CubicBezier easing = new CubicBezier(Easing.EaseInOut);
+        float t = 0;
+        return _timer.WaitWhile(timeData =>
+        {
+            float value = easing.GetValue(t);
+            
+            Vector3 scale = _baseScale;
+            Vector3 targetScale = _baseScale;
+            targetScale.y *= 0.1f;
+            targetScale.x *= 0.1f;
+            targetScale.z *= 0.1f;
+            transform.localScale = Vector3.Lerp(scale, targetScale, GetStretchValue(t));
+
+            t = timeData.elapsedTime / duration;
+            return t < 1;
+        });
+    }
+
     private void Stretch(float progress)
     {
         Vector3 scale = _baseScale;
@@ -178,7 +199,7 @@ public class Animal : MonoBehaviour
 
     public IPromise MoveToBattlePos(float duration, Vector3 targetPosition)
     {
-        SmoothPath path = new SmoothPath(transform.position, targetPosition, new Vector3[] { targetPosition - transform.position }, transform.forward, transform.forward, 3f);
+        SmoothPath path = new SmoothPath(transform.position, targetPosition, new Vector3[] {  }, transform.forward, transform.forward, 3f);
         var promise = new Promise();
         _animator.SetBool("Jump", true);
         MoveAlongPath(path, duration).Then(() =>

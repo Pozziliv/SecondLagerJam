@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -34,6 +35,11 @@ namespace Assets.Scripts.Battle
             Debug.Log(_health);
             _healthImg.fillAmount = 1 - (_maxHealth - _health) * _imgHeathMultiplyer;
             return _health <= 0;
+        }
+
+        public void Attack()
+        {
+            _animator.SetTrigger("Attack");
         }
     }
 }

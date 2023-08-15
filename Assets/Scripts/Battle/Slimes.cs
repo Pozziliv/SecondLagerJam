@@ -84,4 +84,12 @@ public class Slimes : MonoBehaviour
             yield return new WaitForSeconds(0.15f);
         }
     }
+
+    public void Die()
+    {
+        foreach(var animal in animals)
+        {
+            animal.Die(0.2f);
+        }
+    }
 }

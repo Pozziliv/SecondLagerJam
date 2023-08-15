@@ -56,23 +56,19 @@ namespace Assets.Scripts.Battle
 
             yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount());
 
-            Debug.Log("Я заебался, го в арех");
-
-            // Проверка жив ли босс если да то передать ход боссу иначе вызов экрана победы
-
+            if(_spawnedBoss.Health > 0)
+            {
+                StartCoroutine(BossAttack());
+            }
         }
 
         IEnumerator BossAttack()
         {
-            //Проверка живы ли все пачки
-
-            //Выбор по какой пачке бьет босс
-
-            //Если пачка мертва полностью нанести удар иначе удар по следующей пачке
+            _spawnedBoss.Attack();
 
             yield return new WaitForSeconds(0.3f);
 
-            //Проверка живы ли все пачки
+            _slimes.Die();
         }
 
         public void Lost()
