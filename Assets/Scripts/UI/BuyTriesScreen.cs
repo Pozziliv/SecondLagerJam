@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using RSG;
 using UnityEngine.Analytics;
 using Lean.Common;
+using Assets.Scripts.Battle;
 
 public class BuyTriesScreen : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class BuyTriesScreen : MonoBehaviour
     [SerializeField] private AnimationCurve _cameraAnimation;
     [SerializeField] private Transform _finishPos;
     [SerializeField] private float _cameraSpeed = 1f;
+
+    [SerializeField] private BattleSystem _battleSystem;
 
     private IPromiseTimer _timer = new PromiseTimer();
     private Color _backColor;
@@ -65,7 +68,7 @@ public class BuyTriesScreen : MonoBehaviour
     private void GoBattle()
     {
         
-
+        _battleSystem.StartBattle();
         StartCoroutine(CameraMove());
         
     }

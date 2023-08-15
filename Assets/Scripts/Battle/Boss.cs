@@ -7,20 +7,31 @@ namespace Assets.Scripts.Battle
     public class Boss : MonoBehaviour
     {
 
-        public float Healt = 100f;
+        [SerializeField] private int _baseDamage = 50;
+        
+        public float Health = 100f;
+        public float MaxHealth = 100f;
+
+        public BossElements _element;
+
+        
 
         private Animator _animator;
 
+        
+        public int GetDamage()
+        {
+            //TODO: Расчет домага хз
+            return _baseDamage;
+        }
 
+        
         private void Awake()
         {
             _animator = GetComponent<Animator>();            
         }
 
-        private void Start()
-        {
-            //TODO: Запус idle анимации или что то еще хз пока
-        }
-
+        
+        //TODO: Поскольку в этом ебаном аниматоре все ебано сделано походу нада сделать отдельно логику переключения анимацие ебучих
     }
 }

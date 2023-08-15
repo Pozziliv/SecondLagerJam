@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using RSG;
 using Assets.Scripts.Battle;
+using System;
 
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Outline))]
@@ -12,14 +13,16 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private Color _countColor;
 
-    [SerializeField] private AnimalStats _stats;
+    [SerializeField] public AnimalStats _stats;
 
     [Range(1f, 3f)]
     [SerializeField] int _level;
 
     [SerializeField] private Elements _element;
 
-    private Animator _animator;
+    [SerializeField] private List<GameObject> _particles = new List<GameObject>();
+
+    public Animator _animator;
     private Outline _outline;
     private Damping _damp = new Damping(0.5f, 2, 0, 1);
     private Damping _errorDamp = new Damping(0.1f, 5, 0, 3);
@@ -45,6 +48,27 @@ public class Animal : MonoBehaviour
         _animator = GetComponent<Animator>();
         _outline = GetComponent<Outline>();
         _baseScale = transform.localScale;
+
+    }
+
+    private void Start()
+    {
+        int rndElementIndex = UnityEngine.Random.Range(0, 4);
+        _element = (Elements)rndElementIndex;
+        ChangeParticle();
+    }
+
+    private void ChangeParticle()
+    {
+        switch(_element)
+        {
+            case Elements.Neutral: break;
+            case Elements.Fire: _particles[0].SetActive(true); break;
+            case Elements.Wood: _particles[1].SetActive(true); break;        
+            case Elements.Water: _particles[2].SetActive(true); break;
+            
+            
+        }
     }
 
     private void Update()
