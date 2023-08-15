@@ -13,10 +13,8 @@ public class Animal : MonoBehaviour
     [SerializeField] private int _id;
     [SerializeField] private Color _countColor;
 
-    [SerializeField] public AnimalStats _stats;
-
     [Range(1f, 3f)]
-    [SerializeField] int _level;
+    [SerializeField] int _level = 1;
 
     [SerializeField] private Elements _element;
     //sddsad
@@ -51,27 +49,6 @@ public class Animal : MonoBehaviour
         _animator = GetComponent<Animator>();
         _outline = GetComponent<Outline>();
         _baseScale = transform.localScale;
-
-    }
-
-    private void Start()
-    {
-        int rndElementIndex = UnityEngine.Random.Range(0, 4);
-        _element = (Elements)rndElementIndex;
-        ChangeParticle();
-    }
-
-    private void ChangeParticle()
-    {
-        switch(_element)
-        {
-            case Elements.Neutral: break;
-            case Elements.Fire: _particles[0].SetActive(true); break;
-            case Elements.Wood: _particles[1].SetActive(true); break;        
-            case Elements.Water: _particles[2].SetActive(true); break;
-            
-            
-        }
     }
 
     private void Update()
@@ -147,6 +124,26 @@ public class Animal : MonoBehaviour
         return promise;
     }
 
+    internal IPromise Die(float duration)
+    {
+        CubicBezier easing = new CubicBezier(Easing.EaseInOut);
+        float t = 0;
+        return _timer.WaitWhile(timeData =>
+        {
+            float value = easing.GetValue(t);
+            
+            Vector3 scale = _baseScale;
+            Vector3 targetScale = _baseScale;
+            targetScale.y *= 0.1f;
+            targetScale.x *= 0.1f;
+            targetScale.z *= 0.1f;
+            transform.localScale = Vector3.Lerp(scale, targetScale, GetStretchValue(t));
+
+            t = timeData.elapsedTime / duration;
+            return t < 1;
+        });
+    }
+
     private void Stretch(float progress)
     {
         Vector3 scale = _baseScale;
@@ -200,6 +197,33 @@ public class Animal : MonoBehaviour
             transform.position = targetPosition;
             _animator.SetBool("Jump", false);
             RotateBack(0.2f);
+            promise.Resolve();
+        });
+        return promise;
+    }
+
+    public IPromise MoveToBattlePos(float duration, Vector3 targetPosition)
+    {
+        SmoothPath path = new SmoothPath(transform.position, targetPosition, new Vector3[] {  }, transform.forward, transform.forward, 3f);
+        var promise = new Promise();
+        _animator.SetBool("Jump", true);
+        MoveAlongPath(path, duration).Then(() =>
+        {
+            transform.position = targetPosition;
+            _animator.SetBool("Jump", false);
+            promise.Resolve();
+        });
+        return promise;
+    }
+
+    public IPromise Attack(float duration, Vector3 targetPosition)
+    {
+        SmoothPath path = new SmoothPath(transform.position, transform.position, new Vector3[] { targetPosition}, transform.forward, transform.forward, 3f);
+        var promise = new Promise();
+        _animator.SetBool("Jump", true);
+        MoveAlongPath(path, duration).Then(() =>
+        {
+            _animator.SetBool("Jump", false);
             promise.Resolve();
         });
         return promise;

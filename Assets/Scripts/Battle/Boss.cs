@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,31 +8,38 @@ namespace Assets.Scripts.Battle
     public class Boss : MonoBehaviour
     {
 
-        [SerializeField] private int _baseDamage = 50;
-        
-        public float Health = 100f;
-        public float MaxHealth = 100f;
+        [SerializeField] private int _maxHealth = 100;
+        private int _health;
+        [SerializeField] private Image _healthImg;
+        private float _imgHeathMultiplyer;
 
-        public BossElements _element;
+        [HideInInspector]
+        public Animator _animator;
 
-        
+        [SerializeField] private BossElements _element;
 
-        private Animator _animator;
+        public int Health => _health;
+        public BossElements Element => _element;
 
-        
-        public int GetDamage()
-        {
-            //TODO: Расчет домага хз
-            return _baseDamage;
-        }
-
-        
         private void Awake()
         {
-            _animator = GetComponent<Animator>();            
+            _animator = GetComponent<Animator>();
+            _maxHealth *= (int)(DB.GetLevel() * 0.75f);
+            _health = _maxHealth;
+            _imgHeathMultiplyer = 1 / (float)_maxHealth;
+        }
+        
+        public bool TakeDamage(float value)
+        {
+            _health -= (int)value;
+            Debug.Log(_health);
+            _healthImg.fillAmount = 1 - (_maxHealth - _health) * _imgHeathMultiplyer;
+            return _health <= 0;
         }
 
-        
-        //TODO: Поскольку в этом ебаном аниматоре все ебано сделано походу нада сделать отдельно логику переключения анимацие ебучих
+        public void Attack()
+        {
+            _animator.SetTrigger("Attack");
+        }
     }
 }

@@ -12,7 +12,7 @@ namespace Assets.Scripts.Slime
 {
     public class DamageCounter : MonoBehaviour
     {
-        //[SerializeField] private TMP_Text _text;
+        [SerializeField] private TMP_Text _text;
 
         [HideInInspector]
         public List<Aviary> _aviaryList = new List<Aviary>();
@@ -28,7 +28,7 @@ namespace Assets.Scripts.Slime
             {
                 _damage += aviary.GetAnimalsDamage();
             }
-            //_text.text = _damage.ToString();
+            _text.text = _damage.ToString();
         }
 
         public void UpdateDamage()
@@ -38,7 +38,7 @@ namespace Assets.Scripts.Slime
             {
                 _damage += aviary.GetAnimalsDamage();
             }
-            //_text.text = _damage.ToString();
+            _text.text = _damage.ToString();
         }
     }
 }

@@ -8,6 +8,7 @@ using UnityEngine.Events;
 using RSG;
 using System;
 using Assets.Scripts.Slime;
+using Assets.Scripts.Battle;
 
 public class Aviary : MonoBehaviour
 {
@@ -17,10 +18,10 @@ public class Aviary : MonoBehaviour
     [SerializeField] private Image _comboImage;
     [SerializeField] private ParticleSystem _confetti;
     [SerializeField] private Game _game;
+    [SerializeField] private BattleSystem _battleSystem;
     [SerializeField] private DamageCounter _damageCounter;
 
-    public Stack<Animal>  _animals = new Stack<Animal>();
-
+    private Queue<Animal>  _animals = new Queue<Animal>();
     private IPromiseTimer _promiseTimer = new PromiseTimer();
     private ComboContainer _comboContainer;
 
@@ -42,12 +43,6 @@ public class Aviary : MonoBehaviour
     public void PlayConfetti() => _confetti.Play();
 
     public void CloseDoor() => _door.Close();
-
-    private void Start()
-    {
-        _game = FindAnyObjectByType<Game>();
-        _damageCounter = FindAnyObjectByType<DamageCounter>();
-    }
 
     private void OnEnable()
     {
@@ -80,7 +75,6 @@ public class Aviary : MonoBehaviour
     
     public bool TryTakeGroup(List<Node> nodes)
     {
-        Debug.Log("TryTakeGroup");
         List<Node> sortedNodes = nodes.OrderBy(item => Vector3.Distance(item.transform.position, transform.position)).ToList();
         List<Animal> newAnimals = new List<Animal>();
         for (int i = 0; i < sortedNodes.Count; i++)
@@ -107,13 +101,12 @@ public class Aviary : MonoBehaviour
 
     private IEnumerator AddAnimalsLoop(List<Animal> newAnimals, bool sameAnimals)
     {
-        Debug.Log("AddAnimalsLoop");
         MoveAnimals(newAnimals.Count * _movePerAnimal);
         float maxDelta = _movePerAnimal * (newAnimals.Count - 1);
         int i = 0;
         foreach (var animal in newAnimals)
         {
-            _animals.Push(animal);
+            _animals.Enqueue(animal);
             
             int sideDelta = _animals.Count % 2 == 0 ? 1 : -1;
             Vector3 position = transform.position - transform.forward * (2 + maxDelta - i * _movePerAnimal) + transform.right * sideDelta;
@@ -160,7 +153,6 @@ public class Aviary : MonoBehaviour
         /*if (_animals.Where(item => item.ID == newAnimalsID).ToArray().Length == _animals.Count)
         {
             */
-            Debug.Log("ReactOnNewAnimals");
                 string animation = "Jump";
                 foreach (Animal animal in _animals)
                     animal.PlayAnimation(animation);
@@ -225,7 +217,7 @@ public class Aviary : MonoBehaviour
         List<Animal> animals = new List<Animal>();
         for (int i = 0; i < count; i++)
         {
-            Animal animal = _animals.Pop();
+            Animal animal = _animals.Dequeue();
             animals.Add(animal);
         }
 
@@ -246,9 +238,9 @@ public class Aviary : MonoBehaviour
         _promiseTimer.Update(Time.deltaTime);
     }
 
-    public List<Animal> GetAnimals()
+    public Queue<Animal> GetAnimals()
     {
-        return _animals.ToList();
+        return _animals;
     }
 
     internal int GetAnimalsDamage()
@@ -257,18 +249,9 @@ public class Aviary : MonoBehaviour
         foreach(var item in _animals)
         {
             damage += (10 /*Base Damage*/ + item.Level * 5) * 
-                (((int)item.Element == (int)_game.BossElement || (int)item.Element == 0) ? 1 : 
-                ((int)item.Element % 3 + 1 == (int)_game.BossElement) ? 2 : 0.5f);
+                (((int)item.Element == (int)_battleSystem.Element || (int)item.Element == 0) ? 1 : 
+                ((int)item.Element % 3 + 1 == (int)_battleSystem.Element) ? 2 : 0.5f);
         }
         return (int)damage;
-    }
-
-    public void GetDamageAnimation()
-    {
-        foreach(var item in _animals)
-        {
-            item._animator.SetBool("Attack", true);
-            
-        }
     }
 }

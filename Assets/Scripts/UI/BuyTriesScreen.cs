@@ -20,11 +20,11 @@ public class BuyTriesScreen : MonoBehaviour
     [SerializeField] private Game _game;
     [SerializeField] private InGameInput _input;
 
+    [SerializeField] private BattleSystem _battleSystem;
+
     [SerializeField] private AnimationCurve _cameraAnimation;
     [SerializeField] private Transform _finishPos;
     [SerializeField] private float _cameraSpeed = 1f;
-
-    [SerializeField] private BattleSystem _battleSystem;
 
     private IPromiseTimer _timer = new PromiseTimer();
     private Color _backColor;
@@ -67,8 +67,8 @@ public class BuyTriesScreen : MonoBehaviour
 
     private void GoBattle()
     {
-        
-        _battleSystem.StartBattle();
+        StartCoroutine(_battleSystem.SetupBattle());
+
         StartCoroutine(CameraMove());
         
     }

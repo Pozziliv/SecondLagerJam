@@ -27,8 +27,6 @@ public class Game : MonoBehaviour
     [SerializeField] private Leaderboard _totalScoreLeaderboard;
     [SerializeField] private LeanToken _levelToken;
 
-    private BossElements _bossElement;
-
     private Aviary _lastAviary;
     private int _level;
     private const int _levelsPerScene = 4;
@@ -36,8 +34,6 @@ public class Game : MonoBehaviour
 
     public event UnityAction<int, LevelType> LevelStarted;
     public event UnityAction LevelCompleted;
-
-    public BossElements BossElement => _bossElement;
 
     private void Awake()
     {

@@ -17,6 +17,7 @@ namespace Assets.Scripts.Battle
         public void GetDamage()
         {
             
+            
         }
         
     }

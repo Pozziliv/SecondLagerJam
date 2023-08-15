@@ -8,9 +8,9 @@ public class LevelType : ScriptableObject
 {
     [SerializeField] private AnimalSet _set;
     [SerializeField] private GameObject _enviroment;
-    [SerializeField] private BossElements _element;
+    [SerializeField] private Boss _bossPrefab;
 
-    public BossElements Element => _element;
+    public Boss BossPrefab => _bossPrefab;
     public AnimalSet AnimalSet => _set;
     public GameObject Enviroment => _enviroment;
 }

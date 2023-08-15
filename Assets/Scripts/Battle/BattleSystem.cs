@@ -1,7 +1,5 @@
-﻿using Assets.Scripts.Slime;
-using System;
+﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.Battle
@@ -10,177 +8,78 @@ namespace Assets.Scripts.Battle
 
     public class BattleSystem : MonoBehaviour
     {
-
         
-
-        [SerializeField] private Transform _bossSpawnPoint;
-        [SerializeField] private GameObject _bossPrefab;
-        //TODO: Тут стоит правильнее настроить вывод какой бос будет на определенном уровне юзая _bossPrefab
-
-        private DamageCounter _damageCounter;
-        private List<Aviary> _aviaryList = new List<Aviary>();
         private Boss _boss;
-        
+        private Boss _spawnedBoss;
+        [SerializeField] private Transform _bossSpawnPoint;
 
+        [SerializeField] private Game _game;
+        [SerializeField] private Slimes _slimes;
 
-        private void Start()
+        public BossElements Element => _boss.Element;
+
+        private void OnEnable()
         {
-            
-            _boss = _bossPrefab.GetComponent<Boss>();
-
+            _game.LevelStarted += ChangeBoss;
         }
 
-        public void StartBattle()
-        {           
-            StartCoroutine(SetupBattle());
+        private void OnDisable()
+        {
+            _game.LevelStarted -= ChangeBoss;
         }
 
-        IEnumerator SetupBattle()
+        private void ChangeBoss(int level, LevelType levelType)
         {
-            
-            
-            Instantiate(_bossPrefab, _bossSpawnPoint.position, _bossSpawnPoint.rotation);
-            _damageCounter = FindAnyObjectByType<DamageCounter>();
-            _aviaryList = _damageCounter._aviaryList;
-        
+            _boss = levelType.BossPrefab;
+        }
 
-            yield return new WaitForSeconds(0.2f);
+        public IEnumerator SetupBattle()
+        {
+            _spawnedBoss = Instantiate(_boss, _bossSpawnPoint.position, Quaternion.identity);
+
+            _slimes.SetBoss(_spawnedBoss);
+            _slimes.GetAllSlimes();
+
+            yield return new WaitForSeconds(4f);
+
+            _slimes.MoveToBattlePos();
+
+            yield return new WaitForSeconds(1.5f);
 
             StartCoroutine(PlayerAttack());
         }
 
         IEnumerator PlayerAttack()
         {
-            // Проверка жив ли босс           
-            if (_boss.Health <= 0)
-            {
-                Win();
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(2f);
-
-            // Удар по боссу
-            foreach (var aviary in _aviaryList)
-            {
-                aviary.GetDamageAnimation();
-            }
-
-            _boss.Health -= _damageCounter.Damage;
+            StartCoroutine(_slimes.Attack());
             
+            // Удар по боссу
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount());
 
-            if (_boss.Health <= 0)
-            {
-                Win();
-                yield return null;
-            }
-            else
+            if(_spawnedBoss.Health > 0)
             {
                 StartCoroutine(BossAttack());
-                yield return null;
             }
-
-
-
-            // Проверка жив ли босс если да то передать ход боссу иначе вызов экрана победы
-
         }
 
         IEnumerator BossAttack()
         {
+            _spawnedBoss.Attack();
 
-            print("Босс атакует древних русов");
+            yield return new WaitForSeconds(0.3f);
 
-            var bossAttackDamage = _boss.GetDamage();
-
-            //Проверка живы ли все пачки
-            int aviaryCounts = 0;
-            foreach (var aviary in _aviaryList)
-            { 
-                if(aviary._animals.Count > 0)
-                {
-                    aviaryCounts++;
-                }
-            }
-
-            if( aviaryCounts == 0 ) 
-            {
-                Lost();
-                yield return null;
-            }
-
-            
-
-            yield return new WaitForSeconds(1f);
-
-            //Выбор по какой пачке бьет босс
-
-            foreach (var aviary in _aviaryList)
-            {
-                int i = 0;
-                foreach (var animal in aviary._animals)
-                {
-                    if(bossAttackDamage > 0)
-                    {
-                        int temp = (int)animal._stats.CurrentHealth;
-                        animal._stats.CurrentHealth -= bossAttackDamage;
-                        bossAttackDamage -= temp;
-
-                        if(animal._stats.CurrentHealth <= 0)
-                        {
-                            //TODO: не могу из ебучего стека удалить пидараса
-                            
-                            Destroy(animal.gameObject);
-                            print("Помер");
-                        }
-                    }
-                    i++;
-                }
-            }
-
-            yield return new WaitForSeconds(1f);
-
-            
-
-            int aviaryCounts2 = 0;
-            foreach (var aviary in _aviaryList)
-            {
-                if (aviary._animals.Count > 0)
-                {
-                    aviaryCounts2++;
-                }
-            }
-
-            if (aviaryCounts2 == 0)
-            {
-                Lost();
-                yield return null;
-            }
-            else
-            {
-                StartCoroutine(PlayerAttack());
-            }
-           
-
-            
+            _slimes.Die();
         }
 
         public void Lost()
         {
-            print("Древние русы пали в битве с ящером");
+            
         }
 
         public void Win()
         {
-            print("Ящер помер, Древние русы победили");
+
         }
-
-
-        
-
     }
-
-    
 }
