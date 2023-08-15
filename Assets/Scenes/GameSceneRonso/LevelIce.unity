@@ -166,6 +166,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Main Camera
       objectReference: {fileID: 0}
+    - target: {fileID: 5380062479138431360, guid: 0476858cfcd29c841aabee463d478734,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5637328261257413535, guid: 0476858cfcd29c841aabee463d478734,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -283,6 +288,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: IceLvl
+      objectReference: {fileID: 0}
+    - target: {fileID: 8948779953913029886, guid: e1fe5d144dcf2c44ba201f21c59068b3,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178760909788819948, guid: e1fe5d144dcf2c44ba201f21c59068b3,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178760909788819948, guid: e1fe5d144dcf2c44ba201f21c59068b3,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9178760909788819948, guid: e1fe5d144dcf2c44ba201f21c59068b3,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
