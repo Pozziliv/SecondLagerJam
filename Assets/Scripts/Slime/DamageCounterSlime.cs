@@ -19,7 +19,7 @@ namespace Assets.Scripts.Slime
         private int _damage = 0;
 
         public int Damage => _damage;
-
+        
         private void Awake()
         {
             _aviaryList = GameObject.FindObjectsOfType<Aviary>().ToList();
@@ -31,19 +31,21 @@ namespace Assets.Scripts.Slime
             //_text.text = _damage.ToString();
         }
 
-        public void UpdateDamage()
+        public int UpdateDamage()
         {
             _damage = 0;
+            
             foreach (var aviary in _aviaryList)
             {
+
                 _damage += aviary.GetAnimalsDamage();
+                
             }
+
+            return _damage;
             //_text.text = _damage.ToString();
         }
 
-        public int GetDamage()
-        {
-            return _damage;
-        }
+        
     }
 }

@@ -47,7 +47,7 @@ public class ComboText : MonoBehaviour
         if (_locked)
             return;
 
-        _score = value;
+        _score += value;
         ScoreChanged?.Invoke(_score);
         _number.text = _score.ToString();
         _numberPanel.gameObject.SetActive(_score > _minValue);
