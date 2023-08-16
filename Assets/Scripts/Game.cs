@@ -64,7 +64,7 @@ public class Game : MonoBehaviour
     {
         _net.Selected += OnSelectedAnimals;
         _net.Deselected += OnDeselectedAnimals;
-        _net.AnimalsChanged += OnAnimalsChanged;
+        /*_net.AnimalsChanged += OnAnimalsChanged;*/
         _combo.WillDisappear += DoneCombo;
         foreach (var item in _aviaries)
         {
@@ -76,7 +76,7 @@ public class Game : MonoBehaviour
     {
         _net.Selected -= OnSelectedAnimals;
         _net.Deselected -= OnDeselectedAnimals;
-        _net.AnimalsChanged -= OnAnimalsChanged;
+        /*_net.AnimalsChanged -= OnAnimalsChanged;*/
         _combo.WillDisappear -= DoneCombo;
         foreach (var item in _aviaries)
         {
@@ -172,19 +172,20 @@ public class Game : MonoBehaviour
         }
     }
 
-    private void OnAnimalsChanged(int count)
+    /*private void OnAnimalsChanged(int count)
     {
         if (count == 0)
         {
             StartCoroutine(FinishGame());
-            _levelComplete = true;
-            LevelCompleted?.Invoke();
+            
             
         }
-    }
+    }*/
 
-    private IEnumerator FinishGame()
+    public IEnumerator FinishGame()
     {
+        _levelComplete = true;
+        LevelCompleted?.Invoke();
 
         int level = DB.GetLevel();
         Dictionary<string, object> eventParameters = new Dictionary<string, object>

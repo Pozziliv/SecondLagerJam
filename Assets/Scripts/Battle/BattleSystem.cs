@@ -4,8 +4,6 @@ using UnityEngine;
 
 namespace Assets.Scripts.Battle
 {
-
-
     public class BattleSystem : MonoBehaviour
     {
         
@@ -15,6 +13,9 @@ namespace Assets.Scripts.Battle
 
         [SerializeField] private Game _game;
         [SerializeField] private Slimes _slimes;
+
+        public event Action OnLose;
+        public event Action OnWin;
 
         public BossElements Element => _boss.Element;
 
@@ -53,13 +54,17 @@ namespace Assets.Scripts.Battle
         {
             StartCoroutine(_slimes.Attack());
             
-            // Удар по боссу
-
-            yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount());
+            yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount() + 0.1f);
 
             if(_spawnedBoss.Health > 0)
             {
                 StartCoroutine(BossAttack());
+            }
+            else
+            {
+                StartCoroutine(_spawnedBoss.Die());
+                yield return new WaitForSeconds(1f);
+                Win();
             }
         }
 
@@ -70,16 +75,21 @@ namespace Assets.Scripts.Battle
             yield return new WaitForSeconds(0.3f);
 
             _slimes.Die();
+
+            Lose();
         }
 
-        public void Lost()
+        public void Lose()
         {
-            
+            StopAllCoroutines();
+            OnLose?.Invoke();
         }
 
         public void Win()
         {
-
+            StopAllCoroutines();
+            StartCoroutine(_game.FinishGame());
+            OnWin?.Invoke();
         }
     }
 }

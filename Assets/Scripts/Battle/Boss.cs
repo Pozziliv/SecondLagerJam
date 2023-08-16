@@ -13,6 +13,11 @@ namespace Assets.Scripts.Battle
         [SerializeField] private Image _healthImg;
         private float _imgHeathMultiplyer;
 
+        [SerializeField] private GameObject _explosiveParticles;
+        [SerializeField] private GameObject _soulsParticles;
+        [SerializeField] private GameObject _root;
+        [SerializeField] private GameObject _healthUI;
+
         [HideInInspector]
         public Animator _animator;
 
@@ -24,7 +29,7 @@ namespace Assets.Scripts.Battle
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _maxHealth *= (int)(DB.GetLevel() * 0.75f);
+            _maxHealth *= (int)Mathf.Round(((DB.GetLevel() - 1) % 4 + 1)*1.75f);
             _health = _maxHealth;
             _imgHeathMultiplyer = 1 / (float)_maxHealth;
         }
@@ -32,7 +37,6 @@ namespace Assets.Scripts.Battle
         public bool TakeDamage(float value)
         {
             _health -= (int)value;
-            Debug.Log(_health);
             _healthImg.fillAmount = 1 - (_maxHealth - _health) * _imgHeathMultiplyer;
             return _health <= 0;
         }
@@ -40,6 +44,16 @@ namespace Assets.Scripts.Battle
         public void Attack()
         {
             _animator.SetTrigger("Attack");
+        }
+
+        public IEnumerator Die()
+        {
+            _explosiveParticles.SetActive(true);
+            _healthUI.SetActive(false);
+            yield return new WaitForSeconds(0.1f);
+            _root.SetActive(false);
+            yield return new WaitForSeconds(0.4f);
+            _soulsParticles.SetActive(true);
         }
     }
 }
