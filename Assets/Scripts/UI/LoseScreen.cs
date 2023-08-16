@@ -73,6 +73,7 @@ public class LoseScreen : MonoBehaviour
         _timer.Update(Time.deltaTime);
     }
 
+    //TODO: Тут у нас значи после просмотра рекламы шота мутиться и лаве за рекламу критится ЫЫЫ
     private void OnTriesChanged(int tries)
     {
         if (tries == 0 && false)
