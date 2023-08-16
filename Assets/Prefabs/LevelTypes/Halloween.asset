@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae08774bef41d7f4abedb58f6793c035, type: 3}
+  m_Name: Halloween
+  m_EditorClassIdentifier: 
+  _set: {fileID: 11400000, guid: 5b153648f096fe249b5a631f131ce770, type: 2}
+  _enviroment: {fileID: 861568650493109368, guid: 320f8da36e65c2f4db55c5f9779110c4,
+    type: 3}
+  _bossPrefab: {fileID: 7306667116531998579, guid: 45e99415f7c19dc4e92b2e6aa30963d6,
+    type: 3}
