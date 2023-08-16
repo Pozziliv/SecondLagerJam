@@ -142,24 +142,9 @@ public class Animal : MonoBehaviour
         return promise;
     }
 
-    internal IPromise Die(float duration)
+    internal void Die()
     {
-        CubicBezier easing = new CubicBezier(Easing.EaseInOut);
-        float t = 0;
-        return _timer.WaitWhile(timeData =>
-        {
-            float value = easing.GetValue(t);
-            
-            Vector3 scale = _baseScale;
-            Vector3 targetScale = _baseScale;
-            targetScale.y *= 0.1f;
-            targetScale.x *= 0.1f;
-            targetScale.z *= 0.1f;
-            transform.localScale = Vector3.Lerp(scale, targetScale, GetStretchValue(t));
-
-            t = timeData.elapsedTime / duration;
-            return t < 1;
-        });
+        _animator.SetBool("Die", true);
     }
 
     private void Stretch(float progress)

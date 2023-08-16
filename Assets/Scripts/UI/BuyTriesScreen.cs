@@ -32,7 +32,7 @@ public class BuyTriesScreen : MonoBehaviour
 
     public event UnityAction NextButtonClicked;
 
-    public void Appear(int level)
+    public void Appear()
     {
         
         Color startColor = new Color(_backColor.r, _backColor.g, _backColor.b, 0);
@@ -81,7 +81,6 @@ public class BuyTriesScreen : MonoBehaviour
 
         while (progress < 1)
         {
-            
             Camera.main.transform.position = Vector3.Lerp(startPos.position, _finishPos.position, _cameraAnimation.Evaluate(progress));
            
             Camera.main.transform.rotation = Quaternion.Lerp(startPos.rotation, _finishPos.rotation, _cameraAnimation.Evaluate(progress));
@@ -122,6 +121,7 @@ public class BuyTriesScreen : MonoBehaviour
         _tries.TriesChanged += OnTriesChanged;
         _game.LevelStarted += OnLevelChanged;
         _game.LevelCompleted += OnLevelCompleted;
+        _battleSystem.OnLose += Appear;
     }
 
     private void OnDisable()
@@ -129,6 +129,7 @@ public class BuyTriesScreen : MonoBehaviour
         _tries.TriesChanged -= OnTriesChanged;
         _game.LevelStarted -= OnLevelChanged;
         _game.LevelCompleted -= OnLevelCompleted;
+        _battleSystem.OnLose -= Appear;
     }
 
     private void Awake()
@@ -148,8 +149,6 @@ public class BuyTriesScreen : MonoBehaviour
     {
         if (tries == 0)
         {
-           
-            //Appear(_level);
             _input.IsON = false;
             _canvas.interactable = true;
             _canvas.blocksRaycasts = true;
