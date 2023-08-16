@@ -140,6 +140,7 @@ public class Game : MonoBehaviour
 
     private void OnGotAnimal(Aviary aviary)
     {
+        //TODO: _lastAviary
         _lastAviary = aviary;
 
         if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
@@ -152,7 +153,7 @@ public class Game : MonoBehaviour
             _combo.transform.position = worldSpacePosition;
         }
         //TODO: ����1
-        _combo.Increase();
+        //_combo.Increase();
     }
 
     private void DoneCombo(int combo)
@@ -169,22 +170,22 @@ public class Game : MonoBehaviour
                 print($"DoneCombo: {score}");
                 _plusText.Show(score.ToString());
             }
-            StartCoroutine(MovePlusText(_plusText, 0.4f, score));
+            StartCoroutine(MovePlusText(_plusText, 0.4f, score, true));
         }
     }
 
-    public void DoneScore(int score)
+    public void DoneScore(int score, Aviary aviary)
     {
-        if (_lastAviary != null)
+        if (aviary != null)
         {
             if (_canvas.renderMode == RenderMode.ScreenSpaceOverlay)
-                _plusText.transform.position = Camera.main.WorldToScreenPoint(_lastAviary.DoorPosition + _lastAviary.transform.forward * 2.5f);
+                _plusText.transform.position = Camera.main.WorldToScreenPoint(aviary.DoorPosition + aviary.transform.forward * 2.5f);
             else
-                _plusText.transform.position = _lastAviary.DoorPosition + _lastAviary.transform.forward * 3.5f + _lastAviary.transform.up * 4.5f;
+                _plusText.transform.position = aviary.DoorPosition + aviary.transform.forward * 3.5f + aviary.transform.up * 4.5f;
             
-            _plusText.Show(score.ToString());
+            _plusText.Show($"+{score}");
         }
-        StartCoroutine(MovePlusText(_plusText, 0.4f, score));
+        StartCoroutine(MovePlusText(_plusText, 0.4f, score, false));
     }
 
     
@@ -235,7 +236,7 @@ public class Game : MonoBehaviour
         });
     }
 
-    private IEnumerator MovePlusText(PopupText plusText, float delay, int score)
+    private IEnumerator MovePlusText(PopupText plusText, float delay, int score, bool isCombo)
     {
         yield return new WaitForSeconds(delay);
 
@@ -251,7 +252,11 @@ public class Game : MonoBehaviour
             time += Time.deltaTime;
         }
         //TODO: ���� 2
-        _score.Increase(score);
+        if (!isCombo)
+        {
+            _score.Increase(score);
+        }
+        
     }
 
     private void OnApplicationQuit()

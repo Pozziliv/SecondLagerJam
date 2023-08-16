@@ -121,8 +121,14 @@ public class Aviary : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         //TODO: упдэйт дамаге
-        _damageCounter.UpdateDamage();
-        _game.DoneScore(_damageCounter.GetDamage());
+        int damage = 0;
+        foreach(var animal in newAnimals)
+        {
+            damage += (int)((10 /*Base Damage*/ + animal.Level * 5) *
+                (((int)animal.Element == (int)_battleSystem.Element || (int)animal.Element == 0) ? 1 :
+                ((int)animal.Element % 3 + 1 == (int)_battleSystem.Element) ? 2 : 0.5f));
+        }
+        _game.DoneScore(damage, this);
         _promiseTimer.WaitFor(0.4f).Then(() =>
         {
             _door.Close();
