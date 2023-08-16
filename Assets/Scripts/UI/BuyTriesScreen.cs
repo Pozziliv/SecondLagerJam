@@ -34,7 +34,7 @@ public class BuyTriesScreen : MonoBehaviour
 
     public void Appear()
     {
-        //TODO: тут крч луз панель нахуй блять
+        
         Color startColor = new Color(_backColor.r, _backColor.g, _backColor.b, 0);
         _background.color = startColor;
         

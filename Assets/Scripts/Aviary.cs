@@ -9,6 +9,7 @@ using RSG;
 using System;
 using Assets.Scripts.Slime;
 using Assets.Scripts.Battle;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class Aviary : MonoBehaviour
 {
@@ -119,7 +120,9 @@ public class Aviary : MonoBehaviour
 
             yield return new WaitForSeconds(0.1f);
         }
+        //TODO: упдэйт дамаге
         _damageCounter.UpdateDamage();
+        _game.DoneScore(_damageCounter.GetDamage());
         _promiseTimer.WaitFor(0.4f).Then(() =>
         {
             _door.Close();
