@@ -5,13 +5,16 @@ using UnityEngine.Events;
 using Agava.YandexGames;
 using System;
 using UnityEngine.Analytics;
+using Assets.Scripts.Battle;
 
 public class Tries : MonoBehaviour
 {
     [SerializeField] private Aviaries _aviaries;
     [SerializeField] private Game _game;
     [SerializeField] private int _adBuyAmount;
-    [SerializeField] private ScreenAppear _adErrorScreen; 
+    [SerializeField] private ScreenAppear _adErrorScreen;
+
+    [SerializeField] private BattleSystem _battleSystem;
 
     private int _tries;
     private int _usedAd = 0;
@@ -48,8 +51,9 @@ public class Tries : MonoBehaviour
     {
         if (_AdActive == false)
             return;
-        _tries += _adBuyAmount;
-        TriesChanged?.Invoke(_tries);
+        StartCoroutine(_battleSystem.AdvertisementAttack());
+        /*_tries += _adBuyAmount;
+        TriesChanged?.Invoke(_tries);*/
         _usedAd++;
         _AdActive = false;
     }
