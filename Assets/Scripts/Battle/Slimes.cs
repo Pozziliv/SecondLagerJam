@@ -74,6 +74,9 @@ public class Slimes : MonoBehaviour
         {
             Vector3 startPos = animal.transform.position;
             animal.Attack(0.3f, _bossPos.position);
+
+            FindAnyObjectByType<AudioManager>().Play("hit1");
+
             yield return new WaitForSeconds(0.15f);
             if(_boss.TakeDamage((10 /*Base Damage*/ + animal.Level * 5) *
                 (((int)animal.Element == (int)_boss.Element || (int)animal.Element == 0) ? 1 :

@@ -44,11 +44,13 @@ namespace Assets.Scripts.Battle
 
         public void Attack()
         {
+            FindAnyObjectByType<AudioManager>().Play("bossHit1");
             _animator.SetTrigger("Attack");
         }
 
         public IEnumerator Die()
         {
+            FindAnyObjectByType<AudioManager>().Play("bossDie");
             _explosiveParticles.SetActive(true);
             _healthUI.SetActive(false);
             yield return new WaitForSeconds(0.1f);

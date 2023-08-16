@@ -5,8 +5,8 @@ using UnityEngine.Events;
 
 public class AudioSourceVolumeChanger : MonoBehaviour
 {
-    [SerializeField] private AudioSource _audio;
-    [SerializeField] private GlobalVolume.SoundType _type;
+    public AudioSource _audio;
+    [SerializeField] private GlobalVolume.SoundType _type = GlobalVolume.SoundType.InGameSounds;
 
     private GlobalVolume _globalVolume;
     private float _baseVolume;
