@@ -5030,6 +5030,11 @@ PrefabInstance:
       propertyPath: InitialModule.startLifetime.minScalar
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: 3269333544339271485, guid: 79b7d80fbd3b4314580f579971fc8025,
+        type: 3}
+      propertyPath: animatedLights.Array.data[0].light
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4540707518969473932, guid: 79b7d80fbd3b4314580f579971fc8025,
         type: 3}
       propertyPath: m_IsActive
@@ -5066,7 +5071,8 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 1154485234749076225, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
@@ -5129,6 +5135,11 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7413868812517523928, guid: ec4241e42a7cb8c41806f8546a4d31a5,
+        type: 3}
+      propertyPath: animatedLights.Array.data[0].light
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8286249275226670015, guid: ec4241e42a7cb8c41806f8546a4d31a5,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5180,7 +5191,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7043138090544232955, guid: ec4241e42a7cb8c41806f8546a4d31a5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec4241e42a7cb8c41806f8546a4d31a5, type: 3}

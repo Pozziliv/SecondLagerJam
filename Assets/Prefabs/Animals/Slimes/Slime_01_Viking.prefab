@@ -184,6 +184,7 @@ Transform:
   - {fileID: 9042293886379564985}
   - {fileID: 8232614543835699760}
   - {fileID: 7913141296515470094}
+  - {fileID: 2453397320239942972}
   m_Father: {fileID: 7497110113909437751}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6008848281683160717
@@ -251,7 +252,6 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 2453397320239942972}
   - {fileID: 7497110113909437751}
   - {fileID: 1347823160839969777}
   m_Father: {fileID: 0}
@@ -513,7 +513,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 6312573360258431772}
+    m_TransformParent: {fileID: 9011977493725603791}
     m_Modifications:
     - target: {fileID: 192243905760799129, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
         type: 3}
@@ -543,17 +543,17 @@ PrefabInstance:
     - target: {fileID: 1804877672568095356, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 1804877672568095356, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.0000001192093
       objectReference: {fileID: 0}
     - target: {fileID: 1804877672568095356, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -2.4868996e-14
       objectReference: {fileID: 0}
     - target: {fileID: 1804877672568095356, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
         type: 3}
@@ -570,8 +570,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2341545977674845248, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
+        type: 3}
+      propertyPath: animatedLights.Array.data[0].light
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3352121092628303458, guid: d70608a716ff8f74cb1c8f2f0d6eaad7,
+        type: 3}
+      propertyPath: animatedLights.Array.data[0].light
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3015224817309283905, guid: d70608a716ff8f74cb1c8f2f0d6eaad7, type: 3}
+    - {fileID: 2099900169615528060, guid: d70608a716ff8f74cb1c8f2f0d6eaad7, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d70608a716ff8f74cb1c8f2f0d6eaad7, type: 3}
