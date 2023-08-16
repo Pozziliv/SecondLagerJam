@@ -188,8 +188,6 @@ public class Game : MonoBehaviour
     }
 
     
-
-    private void OnAnimalsChanged(int count)
     /*private void OnAnimalsChanged(int count)
     {
         if (count == 0)
