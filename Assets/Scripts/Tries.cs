@@ -43,6 +43,7 @@ public class Tries : MonoBehaviour
         VideoAdRewarded -= OnAdRewarded;
     }
 
+    //TODO: Ревард
     private void OnAdRewarded()
     {
         if (_AdActive == false)
