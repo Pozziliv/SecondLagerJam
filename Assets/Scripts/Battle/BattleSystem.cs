@@ -79,6 +79,28 @@ namespace Assets.Scripts.Battle
             Lose();
         }
 
+        public IEnumerator AdvertisementAttack()
+        {
+            yield return new WaitForSeconds(1f);
+
+            _spawnedBoss.AdvertisementAttack();
+
+            yield return new WaitForSeconds(0.05f);
+
+            _spawnedBoss.TakeDamage(10000f);
+
+            if (_spawnedBoss.Health < 0)
+            {
+                StartCoroutine(_spawnedBoss.AdvertisementDie());
+                yield return new WaitForSeconds(0.5f);
+                Win();
+            }
+            else
+            {
+                Lose();
+            }
+        }
+
         public void Lose()
         {
             StopAllCoroutines();
