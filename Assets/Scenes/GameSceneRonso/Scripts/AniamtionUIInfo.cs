@@ -51,8 +51,10 @@ public class AniamtionUIInfo : MonoBehaviour
             StopCoroutine(_disappearDelayTask);
 
         _appearTask = StartCoroutine(AppearWithDelay());
-        _disappearDelayTask = StartCoroutine(DisappearAfter());
+        //_disappearDelayTask = StartCoroutine(DisappearAfter());
     }
+
+    public void DelayInfo() => StartCoroutine(DisappearAfter());
 
     public void Show(Vector3 position, string text = "")
     {
