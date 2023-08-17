@@ -36,6 +36,7 @@ public class Tries : MonoBehaviour
         _aviaries.Interacted += Try;
         VideoAdErrorOccurred += OnAdErrorOccured;
         VideoAdRewarded += OnAdRewarded;
+        VideoAdClosed += OnAdClosed;
     }
 
     private void OnDisable()
@@ -44,6 +45,7 @@ public class Tries : MonoBehaviour
         _aviaries.Interacted -= Try;
         VideoAdErrorOccurred -= OnAdErrorOccured;
         VideoAdRewarded -= OnAdRewarded;
+        VideoAdClosed -= OnAdClosed;
     }
 
     //TODO: Ревард
@@ -51,7 +53,7 @@ public class Tries : MonoBehaviour
     {
         if (_AdActive == false)
             return;
-        StartCoroutine(_battleSystem.AdvertisementAttack());
+        
         /*_tries += _adBuyAmount;
         TriesChanged?.Invoke(_tries);*/
         _usedAd++;
@@ -60,6 +62,7 @@ public class Tries : MonoBehaviour
 
     private void OnAdErrorOccured(string error)
     {
+        FindFirstObjectByType<InGameSound>().SetMute(false);
         _adErrorScreen.Appear();
     }
 
@@ -92,6 +95,15 @@ public class Tries : MonoBehaviour
     public void StartAD()
     {
         _AdActive = true;
+        FindFirstObjectByType<InGameSound>().SetMute(true);
         VideoAd.Show(VideoAdOpened, VideoAdRewarded, VideoAdClosed, VideoAdErrorOccurred);
     }
+
+    private void OnAdClosed()
+    {
+        StartCoroutine(_battleSystem.AdvertisementAttack());
+        FindFirstObjectByType<InGameSound>().SetMute(false);
+    }
+
+    
 }
