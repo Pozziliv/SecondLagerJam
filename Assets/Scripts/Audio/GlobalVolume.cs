@@ -11,7 +11,7 @@ public abstract class GlobalVolume : MonoBehaviour
     private const float _min = 0f;
     private const float _max = 1f;
 
-    private bool _muted;
+    public bool _muted;
 
     public SoundType Type => GetSoundType();
 

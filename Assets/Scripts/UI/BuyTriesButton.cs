@@ -7,8 +7,8 @@ public class BuyTriesButton : MonoBehaviour
     [SerializeField] Tries _tries;
     [SerializeField] TMP_Text _text;
 
-    private void Awake()
-    {
-        _text.text = "+" + _tries.AdBuyAmount.ToString();
-    }
+    //private void Awake()
+    //{
+    //    _text.text = "+" + _tries.AdBuyAmount.ToString();
+    //}
 }
