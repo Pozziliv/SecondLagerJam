@@ -45,7 +45,7 @@ public class Slimes : MonoBehaviour
                 damage += (int)((10 /*Base Damage*/ + animal.Level * 5) *
                     (((int)animal.Element == (int)_boss.Element || (int)animal.Element == 0) ? 1 :
                     ((int)animal.Element % 3 + 1 == (int)_boss.Element) ? 2 : 0.5f));
-                if (damage >= _boss.Health)
+                if (damage > _boss.Health)
                     return count;
             }
         return count;
