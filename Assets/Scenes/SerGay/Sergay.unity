@@ -3207,6 +3207,12 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1091852483}
     m_Modifications:
+    - target: {fileID: 2641868870743959188, guid: bffd43c826e313c43abae71a8a7a62df,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 2c663647b34512644a6d33f17aa69b3c,
+        type: 3}
     - target: {fileID: 3973909463480355625, guid: bffd43c826e313c43abae71a8a7a62df,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -3411,7 +3417,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 9127e9028a9bfe24ea26f2d6cf53d5b8, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 73c4f5163be524f4da18b5c7745d1ec9, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.2
   m_Pitch: 1
