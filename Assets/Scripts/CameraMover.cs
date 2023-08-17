@@ -30,8 +30,8 @@ public class CameraMover : MonoBehaviour
 
             transform.position = Vector3.Lerp(position, targetTransform.position, value);
             transform.rotation = Quaternion.Lerp(rotation, targetTransform.rotation, value);
-            yield return null;
-            time += Time.deltaTime;
+            time += Time.fixedDeltaTime;
+            yield return new WaitForFixedUpdate();
         }
 
         transform.position = targetTransform.position;

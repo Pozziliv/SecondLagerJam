@@ -6288,14 +6288,14 @@ MonoBehaviour:
   - Name: hit1
     Clip: {fileID: 8300000, guid: 3ca63aafbe4e7eb418b6e388b6fdc7fe, type: 3}
     Volume: 0.5
-    Pitch: 0.7
-  - Name: bossHit1
+    Pitch: 1
+  - Name: bossDie
     Clip: {fileID: 8300000, guid: 3479d653375d3214caa28f3018b32616, type: 3}
     Volume: 0.5
-    Pitch: 0.7
-  - Name: bossDie
-    Clip: {fileID: 8300000, guid: d623348f238097e4aa387b9717c1a467, type: 3}
-    Volume: 0.5
+    Pitch: 1
+  - Name: bossHit1
+    Clip: {fileID: 8300000, guid: 368d616efe49ba840a51ebb1ef9e6f7d, type: 3}
+    Volume: 1
     Pitch: 0.7
   _source: {fileID: 1344043546}
 --- !u!1 &1388205027
