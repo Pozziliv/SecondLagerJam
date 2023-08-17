@@ -61,6 +61,7 @@ namespace Assets.Scripts.Battle
 
         public IEnumerator AdvertisementDie()
         {
+            FindAnyObjectByType<AudioManager>().Play("bossDie");
             _healthUI.SetActive(false);
             yield return new WaitForSeconds(0.1f);
             _root.SetActive(false);

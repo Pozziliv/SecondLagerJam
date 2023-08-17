@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   outlineMode: 1
-  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineColor: {r: 0.754717, g: 0.754717, b: 0.754717, a: 1}
   outlineWidth: 8.56
   _stancilID: 1
   precomputeOutline: 0
