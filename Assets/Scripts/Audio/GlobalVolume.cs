@@ -81,7 +81,7 @@ public abstract class GlobalVolume : MonoBehaviour
         SetMute(!_muted);
     }
 
-    private void SetMute(bool mute)
+    public void SetMute(bool mute)
     {
         _muted = mute;
         VolumeChanged?.Invoke(Volume);
