@@ -52,11 +52,7 @@ namespace Assets.Scripts.Battle
 
         IEnumerator PlayerAttack()
         {
-            StartCoroutine(_slimes.Attack());
-
-            Debug.Log(0.3f * _slimes.GetDamagableCount() + 0.2f);
-
-            yield return new WaitForSecondsRealtime(0.3f * _slimes.GetDamagableCount() + 0.2f);
+            yield return StartCoroutine(_slimes.Attack());
 
             if(_spawnedBoss.Health >= 0)
             {
