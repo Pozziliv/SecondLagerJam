@@ -90,7 +90,7 @@ namespace Assets.Scripts.Battle
 
             yield return new WaitForSeconds(0.05f);
 
-            _spawnedBoss.TakeDamage(10000f);
+            _spawnedBoss.TakeDamage(10000);
 
             if (_spawnedBoss.Health < 0)
             {

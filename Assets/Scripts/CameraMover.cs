@@ -15,7 +15,7 @@ public class CameraMover : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(Move(_gamePosition, 2f, 1));
+        StartCoroutine(Move(_gamePosition, 2f, 0.5f));
     }
 
     private IEnumerator Move(Transform targetTransform, float duration, float delay = 0)

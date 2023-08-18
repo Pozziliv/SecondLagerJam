@@ -35,9 +35,9 @@ namespace Assets.Scripts.Battle
             _imgHeathMultiplyer = 1 / (float)_maxHealth;
         }
         
-        public bool TakeDamage(float value)
+        public bool TakeDamage(int value)
         {
-            _health -= (int)value;
+            _health -= value;
             _healthImg.fillAmount = 1 - (_maxHealth - _health) * _imgHeathMultiplyer;
             return _health <= 0;
         }
