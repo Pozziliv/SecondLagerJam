@@ -56,7 +56,7 @@ namespace Assets.Scripts.Battle
 
             Debug.Log(0.3f * _slimes.GetDamagableCount() + 0.2f);
 
-            yield return new WaitForSeconds(0.3f * _slimes.GetDamagableCount() + 0.2f);
+            yield return new WaitForSecondsRealtime(0.3f * _slimes.GetDamagableCount() + 0.2f);
 
             if(_spawnedBoss.Health >= 0)
             {

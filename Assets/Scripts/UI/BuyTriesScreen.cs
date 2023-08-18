@@ -87,7 +87,6 @@ public class BuyTriesScreen : MonoBehaviour
             progress += Time.fixedDeltaTime * _cameraSpeed;
             yield return new WaitForFixedUpdate();
         }
-       
     }
 
 
