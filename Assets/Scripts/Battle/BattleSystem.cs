@@ -54,7 +54,7 @@ namespace Assets.Scripts.Battle
         {
             yield return StartCoroutine(_slimes.Attack());
 
-            if(_spawnedBoss.Health >= 0)
+            if(_spawnedBoss.Health > 0)
             {
                 Debug.Log(_spawnedBoss.Health);
                 StartCoroutine(BossAttack());
