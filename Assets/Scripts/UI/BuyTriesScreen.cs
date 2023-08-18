@@ -84,8 +84,8 @@ public class BuyTriesScreen : MonoBehaviour
             Camera.main.transform.position = Vector3.Lerp(startPos.position, _finishPos.position, _cameraAnimation.Evaluate(progress));
            
             Camera.main.transform.rotation = Quaternion.Lerp(startPos.rotation, _finishPos.rotation, _cameraAnimation.Evaluate(progress));
-            progress += Time.deltaTime * _cameraSpeed; 
-            yield return null;
+            progress += Time.fixedDeltaTime * _cameraSpeed;
+            yield return new WaitForFixedUpdate();
         }
        
     }
