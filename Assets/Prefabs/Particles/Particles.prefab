@@ -1065,7 +1065,7 @@ ParticleSystem:
           m_PostInfinity: 2
           m_RotationOrder: 4
       cycleCount: 2
-      repeatInterval: 0.5
+      repeatInterval: 1
       probability: 1
   SizeModule:
     enabled: 1
@@ -5057,6 +5057,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5101029377490270184, guid: 79b7d80fbd3b4314580f579971fc8025,
         type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5101029377490270184, guid: 79b7d80fbd3b4314580f579971fc8025,
+        type: 3}
       propertyPath: InitialModule.startLifetime.scalar
       value: 0.5
       objectReference: {fileID: 0}
@@ -5073,6 +5078,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 1154485234749076225, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
+    - {fileID: 2313403203797289693, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
+    - {fileID: 4540707518969473932, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 79b7d80fbd3b4314580f579971fc8025, type: 3}
@@ -5118,7 +5125,7 @@ PrefabInstance:
     - target: {fileID: 3463029192943691844, guid: ec4241e42a7cb8c41806f8546a4d31a5,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3748635496773735877, guid: ec4241e42a7cb8c41806f8546a4d31a5,
         type: 3}
@@ -5189,6 +5196,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8343693421192995712, guid: ec4241e42a7cb8c41806f8546a4d31a5,
+        type: 3}
+      propertyPath: EmissionModule.rateOverTime.scalar
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

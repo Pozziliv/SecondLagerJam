@@ -57,12 +57,12 @@ public class Slimes : MonoBehaviour
         int rowIndex = 0;
         foreach (var animal in animals)
         {
-            rowIndex++;
             if (rowIndex == _rowLength + 1)
             {
                 rowIndex = 0;
                 columnNumber++;
             }
+            rowIndex++;
             Vector3 targetPos = transform.position + new Vector3(-5 * 3f + rowIndex * 3f, 0f, columnNumber * 3f);
             animal.MoveToBattlePos(1f, targetPos);
         }

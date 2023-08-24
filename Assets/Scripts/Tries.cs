@@ -20,6 +20,8 @@ public class Tries : MonoBehaviour
     private int _usedAd = 0;
     private bool _AdActive;
 
+    private bool _isNotMutedBeforeAd = false;
+
     public int AdBuyAmount => _adBuyAmount;
     public int UsedAd => _usedAd;
 
@@ -95,6 +97,8 @@ public class Tries : MonoBehaviour
     public void StartAD()
     {
         _AdActive = true;
+        if (FindFirstObjectByType<InGameSound>()._muted == false)
+            _isNotMutedBeforeAd = true;
         FindFirstObjectByType<InGameSound>().SetMute(true);
         VideoAd.Show(VideoAdOpened, VideoAdRewarded, VideoAdClosed, VideoAdErrorOccurred);
     }
@@ -102,8 +106,10 @@ public class Tries : MonoBehaviour
     private void OnAdClosed()
     {
         StartCoroutine(_battleSystem.AdvertisementAttack());
-        FindFirstObjectByType<InGameSound>().SetMute(false);
+        if (_isNotMutedBeforeAd)
+        {
+            _isNotMutedBeforeAd = false;
+            FindFirstObjectByType<InGameSound>().SetMute(false);
+        }
     }
-
-    
 }

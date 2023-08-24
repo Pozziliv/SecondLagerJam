@@ -17,9 +17,9 @@ public class Animal : MonoBehaviour
     [SerializeField] int _level = 1;
 
     [SerializeField] private Elements _element;
-    //sddsad
-    //sd
     [SerializeField] private List<GameObject> _particles = new List<GameObject>();
+    [SerializeField] private List<GameObject> _icons = new List<GameObject>();
+    [SerializeField] private GameObject _panel;
 
     private float _sss;
 
@@ -37,6 +37,7 @@ public class Animal : MonoBehaviour
     private Coroutine _pressTask;
     private Coroutine _shakeTask;
 
+    private GameObject _icon;
 
     public int Level => _level;
     public Elements Element => _element;
@@ -63,9 +64,9 @@ public class Animal : MonoBehaviour
         switch (_element)
         {
             case Elements.Neutral: break;
-            case Elements.Fire: _particles[0].SetActive(true); break;
-            case Elements.Wood: _particles[1].SetActive(true); break;
-            case Elements.Water: _particles[2].SetActive(true); break;
+            case Elements.Fire: _particles[0].SetActive(true); _icon = _icons[0]; break;
+            case Elements.Wood: _particles[1].SetActive(true); _icon = _icons[1]; break;
+            case Elements.Water: _particles[2].SetActive(true); _icon = _icons[2]; break;
         }
     }
 
@@ -81,7 +82,10 @@ public class Animal : MonoBehaviour
 
     public void Select()
     {
-        _outline.enabled = true;
+        //_outline.enabled = true;
+        _panel.SetActive(true);
+        if (_icon != null )
+            _icon.SetActive(true);
         if (_pressTask != null)
             StopCoroutine(_pressTask);
 
@@ -90,7 +94,10 @@ public class Animal : MonoBehaviour
 
     public void Unselect()
     {
-        _outline.enabled = false;
+        //_outline.enabled = false;
+        _panel.SetActive(false);
+        if (_icon != null)
+            _icon.SetActive(false);
     }
 
     public void Shake()
